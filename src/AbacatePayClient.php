@@ -2,25 +2,36 @@
 
 declare(strict_types=1);
 
+use AbacatePay\Customer\CustomerResource;
 use GuzzleHttp\Client;
 
-class AbacatePayClient
+final class AbacatePayClient
 {
-    public Client $client;
+    private Client $client;
 
-    public function __construct(public string $token)
-    {
+    public function __construct(
+        private readonly string $token,
+    ) {
         $this->client = new Client([
             'headers' => [
-                'Authorization' => 'Bearer '.$token
-            ]
+                'Authorization' => 'Bearer '.$this->token,
+                'Content-Type' => 'application/json',
+            ],
         ]);
     }
 
     public function customer(): CustomerResource
     {
-        return new CustomerResource(
-            client: $this->client
-        );
+        return new CustomerResource($this->client);
+    }
+
+    public function billing(): BillingResource
+    {
+        return new BillingResource($this->client);
+    }
+
+    public function pix(): PixResource
+    {
+        return new PixResource($this->client);
     }
 }

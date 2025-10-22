@@ -8,9 +8,15 @@
       "AbacatePay\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "require": {
     "php": "^8.4",
-    "guzzlehttp/guzzle": "^7.10.0"
+    "guzzlehttp/guzzle": "^7.10.0",
+    "symfony/http-foundation": "^v7.3.4"
   },
   "require-dev": {
     "pestphp/pest": "^v4.1.2",

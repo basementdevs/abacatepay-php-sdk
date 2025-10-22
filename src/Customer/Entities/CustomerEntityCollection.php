@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Customer\Collection;
+namespace AbacatePay\Customer\Entities;
 
 use ArrayIterator;
 use Countable;
-use Customer\Entities\CustomerEntity;
 use IteratorAggregate;
 
-class CustomerCollection implements IteratorAggregate, Countable
+class CustomerEntityCollection implements IteratorAggregate, Countable
 {
     /** @var CustomerEntity[] */
     private array $items;

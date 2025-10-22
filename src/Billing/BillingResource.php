@@ -1,21 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
-namespace AbacatePay\Customer;
-
-use AbacatePay\Customer\Entities\CreateCustomerRequest;
-use AbacatePay\Customer\Entities\CreateCustomerResponse;
-use AbacatePay\Customer\Entities\CustomerEntityCollection;
+use AbacatePay\Billing\Entities\CreateBillingRequest;
+use AbacatePay\Billing\Entities\CreateBillingResponse;
+use AbacatePay\Billing\Entities\ListBillingResponse;
 use AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CustomerResource
+final class BillingResource
 {
-    public const string BASE_URI = "https://api.abacatepay.com/v1/customer";
+    public const string BASE_URI = "https://api.abacatepay.com/v1/billing";
 
     public function __construct(
         private readonly Client $client,
@@ -26,7 +22,7 @@ final class CustomerResource
      * @throws AbacatePayException
      * @throws JsonException
      */
-    public function create(CreateCustomerRequest $request): CreateCustomerResponse
+    public function create(CreateBillingRequest $request): CreateBillingResponse
     {
         try {
             $response = $this->client->post(self::BASE_URI."/create", [
@@ -40,7 +36,7 @@ final class CustomerResource
                 JSON_THROW_ON_ERROR
             );
 
-            return CreateCustomerResponse::fromArray($responsePayload);
+            return CreateBillingResponse::fromArray($responsePayload);
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
@@ -53,10 +49,11 @@ final class CustomerResource
      * @throws AbacatePayException
      * @throws JsonException
      */
-    public function list(): CustomerEntityCollection
+    public function list(): ListBillingResponse
     {
         try {
             $response = $this->client->get(self::BASE_URI."/list");
+
             $responsePayload = json_decode(
                 $response->getBody()->getContents(),
                 true,
@@ -64,7 +61,8 @@ final class CustomerResource
                 JSON_THROW_ON_ERROR
             );
 
-            return CustomerEntityCollection::fromArray($responsePayload['data']);
+            return ListBillingResponse::fromArray($responsePayload);
+
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),

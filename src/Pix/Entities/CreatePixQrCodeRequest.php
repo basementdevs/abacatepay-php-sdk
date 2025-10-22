@@ -1,0 +1,28 @@
+<?php
+
+namespace Entities;
+
+use PixCustomerRequest;
+
+final readonly class CreatePixQrCodeRequest
+{
+    public function __construct(
+        public int $amount,
+        public int $expiresIn,
+        public string $description,
+        public PixCustomerRequest $customer,
+        public PixMetadataRequest $metadata,
+    ) {
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'amount' => $this->amount,
+            'expiresIn' => $this->expiresIn,
+            'description' => $this->description,
+            'customer' => $this->customer->toArray(),
+            'metadata' => $this->metadata->toArray(),
+        ];
+    }
+}
