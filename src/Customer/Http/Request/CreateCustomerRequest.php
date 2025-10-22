@@ -1,14 +1,16 @@
 <?php
 
-namespace AbacatePay\Billing\Entities;
+declare(strict_types=1);
 
-final readonly class CustomerRequest
+namespace AbacatePay\Customer\Http\Request;
+
+final readonly class CreateCustomerRequest
 {
     public function __construct(
         public string $name,
         public string $cellphone,
         public string $email,
-        public string $taxId,
+        public string $tax_id,
     ) {
     }
 
@@ -18,7 +20,7 @@ final readonly class CustomerRequest
             'name' => $this->name,
             'cellphone' => $this->cellphone,
             'email' => $this->email,
-            'taxId' => $this->taxId,
+            'tax_id' => $this->tax_id,
         ];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace AbacatePay\Pix\Http\Request;
+
 final readonly class PixCustomerRequest
 {
     public function __construct(

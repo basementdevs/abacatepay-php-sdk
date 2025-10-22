@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace AbacatePay\Customer;
 
-use AbacatePay\Customer\Entities\CreateCustomerRequest;
-use AbacatePay\Customer\Entities\CreateCustomerResponse;
 use AbacatePay\Customer\Entities\CustomerEntityCollection;
+use AbacatePay\Customer\Http\Request\CreateCustomerRequest;
+use AbacatePay\Customer\Http\Response\CreateCustomerResponse;
 use AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CustomerResource
+final readonly class CustomerResource
 {
-    public const string BASE_URI = "https://api.abacatepay.com/v1/customer";
+    public const string BASE_PATH = '/customer';
 
     public function __construct(
-        private readonly Client $client,
+        private Client $client,
     ) {
     }
 
@@ -29,7 +29,7 @@ final class CustomerResource
     public function create(CreateCustomerRequest $request): CreateCustomerResponse
     {
         try {
-            $response = $this->client->post(self::BASE_URI."/create", [
+            $response = $this->client->post(sprintf('%s/create', self::BASE_PATH), [
                 'json' => $request->toArray(),
             ]);
 
@@ -56,7 +56,7 @@ final class CustomerResource
     public function list(): CustomerEntityCollection
     {
         try {
-            $response = $this->client->get(self::BASE_URI."/list");
+            $response = $this->client->get(sprintf('%s/list', self::BASE_PATH));
             $responsePayload = json_decode(
                 $response->getBody()->getContents(),
                 true,

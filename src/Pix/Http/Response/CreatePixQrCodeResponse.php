@@ -1,6 +1,10 @@
 <?php
 
-namespace Entities;
+declare(strict_types=1);
+
+namespace AbacatePay\Pix\Http\Response;
+
+use Entities\PixQrCodeEntity;
 
 final readonly class CreatePixQrCodeResponse
 {

@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use AbacatePay\Exception\AbacatePayException;
-use Entities\CreatePixQrCodeRequest;
-use Entities\CreatePixQrCodeResponse;
+use AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
+use AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
 
-final class PixResource
+final readonly class PixResource
 {
-    public const string BASE_URI = "https://api.abacatepay.com/v1/pixQrCode";
+    public const string BASE_PATH = '/pixQrCode';
 
     public function __construct(
-        private readonly Client $client,
+        private Client $client,
     ) {
     }
 
@@ -23,7 +25,7 @@ final class PixResource
     public function createQrCode(CreatePixQrCodeRequest $request): CreatePixQrCodeResponse
     {
         try {
-            $response = $this->client->post(self::BASE_URI."/create", [
+            $response = $this->client->post(sprintf('%s/create', self::BASE_PATH), [
                 'json' => $request->toArray(),
             ]);
 

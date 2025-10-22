@@ -1,8 +1,8 @@
 <?php
 
-namespace Entities;
+declare(strict_types=1);
 
-use PixCustomerRequest;
+namespace AbacatePay\Pix\Http\Request;
 
 final readonly class CreatePixQrCodeRequest
 {

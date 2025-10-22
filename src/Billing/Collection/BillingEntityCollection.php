@@ -1,13 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Entities;
+namespace AbacatePay\Billing\Collection;
 
+use AbacatePay\Billing\Entities\BillingEntity;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
-final class BillingEntityCollection implements IteratorAggregate, Countable
+final class BillingEntityCollection implements Countable, IteratorAggregate
 {
     /** @var BillingEntity[] */
     private array $items;

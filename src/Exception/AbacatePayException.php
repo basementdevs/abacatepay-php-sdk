@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AbacatePay\Exception;
@@ -23,6 +24,7 @@ final class AbacatePayException extends Exception
     public static function fromResponse(int $statusCode, array $responseBody): self
     {
         $message = $responseBody['error'] ?? 'Erro desconhecido';
+
         return new self($message, $statusCode, $responseBody);
     }
 }

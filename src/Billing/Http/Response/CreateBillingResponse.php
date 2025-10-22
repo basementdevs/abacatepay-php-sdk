@@ -1,6 +1,10 @@
 <?php
 
-namespace AbacatePay\Billing\Entities;
+declare(strict_types=1);
+
+namespace AbacatePay\Billing\Http\Response;
+
+use AbacatePay\Billing\Entities\BillingEntity;
 
 final readonly class CreateBillingResponse
 {

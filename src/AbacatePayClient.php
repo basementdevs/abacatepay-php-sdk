@@ -5,16 +5,19 @@ declare(strict_types=1);
 use AbacatePay\Customer\CustomerResource;
 use GuzzleHttp\Client;
 
-final class AbacatePayClient
+final readonly class AbacatePayClient
 {
     private Client $client;
 
+    private const string BASE_URL = 'https://api.abacatepay.com/v1';
+
     public function __construct(
-        private readonly string $token,
+        private string $token,
     ) {
         $this->client = new Client([
+            'base_uri' => self::BASE_URL,
             'headers' => [
-                'Authorization' => 'Bearer '.$this->token,
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
         ]);

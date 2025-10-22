@@ -1,6 +1,8 @@
 <?php
 
-namespace Entities;
+declare(strict_types=1);
+
+namespace AbacatePay\Pix\Http\Request;
 
 final readonly class PixMetadataRequest
 {
