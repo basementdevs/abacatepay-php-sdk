@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AbacatePay\Pix\Http\Request;
 
-final readonly class CreatePixQrCodeRequest
+use JsonSerializable;
+
+final readonly class CreatePixQrCodeRequest implements JsonSerializable
 {
     public function __construct(
         public int $amount,
@@ -15,7 +17,7 @@ final readonly class CreatePixQrCodeRequest
     ) {
     }
 
-    public function toArray(): array
+    public function jsonSerialize(): array
     {
         return [
             'amount' => $this->amount,

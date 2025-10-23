@@ -5,8 +5,8 @@ declare(strict_types=1);
 use AbacatePay\Billing\BillingResource;
 use AbacatePay\Billing\Collection\BillingEntityCollection;
 use AbacatePay\Billing\Entities\BillingEntity;
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
 use AbacatePay\Billing\Http\Request\CreateBillingRequest;
 use AbacatePay\Billing\Http\Request\ProductRequest;
 use AbacatePay\Billing\Http\Response\CreateBillingResponse;
@@ -52,8 +52,7 @@ it('creates a billing successfully', function () {
             ],
             'allowCoupons' => false,
             'coupons' => []
-        ],
-        'error' => null
+        ]
     ];
 
     $response = new Response(200, [], json_encode($responseData));
@@ -65,8 +64,8 @@ it('creates a billing successfully', function () {
         ->andReturn($response);
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [
             new ProductRequest(
                 'prod-1234',
@@ -96,8 +95,7 @@ it('creates a billing successfully', function () {
     expect($result)->toBeInstanceOf(CreateBillingResponse::class)
         ->and($result->data)->toBeInstanceOf(BillingEntity::class)
         ->and($result->data->id)->toBe('bill_123456')
-        ->and($result->data->amount)->toBe(4000)
-        ->and($result->error)->toBeNull();
+        ->and($result->data->amount)->toBe(4000);
 });
 
 it('throws unauthorized exception on create billing', function () {
@@ -110,8 +108,8 @@ it('throws unauthorized exception on create billing', function () {
         ->andThrow($exception);
 
     $billingRequest = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
@@ -147,8 +145,7 @@ it('lists billing successfully', function () {
                 'allowCoupons' => false,
                 'coupons' => []
             ]
-        ],
-        'error' => null
+        ]
     ];
 
     $response = new Response(200, [], json_encode($responseData));
@@ -163,8 +160,7 @@ it('lists billing successfully', function () {
 
     expect($result)->toBeInstanceOf(ListBillingResponse::class)
         ->and($result->data)->toBeInstanceOf(BillingEntityCollection::class)
-        ->and(count($result->data))->toBe(1)
-        ->and($result->error)->toBeNull();
+        ->and(count($result->data))->toBe(1);
 });
 
 it('throws unauthorized exception on list billing', function () {
@@ -194,8 +190,7 @@ it('creates billing with minimal data', function () {
             'customer' => null,
             'allowCoupons' => true,
             'coupons' => []
-        ],
-        'error' => null
+        ]
     ];
 
     $response = new Response(200, [], json_encode($responseData));
@@ -206,8 +201,8 @@ it('creates billing with minimal data', function () {
         ->andReturn($response);
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::MultiplePayments,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::MultiplePayments,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AbacatePay\Billing\Enum;
 
-enum AbacatePayBillingMethodEnum: string
+enum BillingMethodEnum: string
 {
     case Pix = 'PIX';
     case Card = 'CARD';

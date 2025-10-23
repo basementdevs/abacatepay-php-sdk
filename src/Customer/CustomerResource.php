@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class CustomerResource
 {
-    public const string BASE_PATH = '/customer';
+    public const string BASE_PATH = 'customer';
 
     public function __construct(
         private Client $client,

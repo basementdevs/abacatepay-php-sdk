@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace AbacatePay\Pix;
+
 use AbacatePay\Exception\AbacatePayException;
 use AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
 use AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
@@ -11,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class PixResource
 {
-    public const string BASE_PATH = '/pixQrCode';
+    public const string BASE_PATH = 'pixQrCode';
 
     public function __construct(
         private Client $client,
@@ -26,7 +28,7 @@ final readonly class PixResource
     {
         try {
             $response = $this->client->post(sprintf('%s/create', self::BASE_PATH), [
-                'json' => $request->toArray(),
+                'json' => $request->jsonSerialize(),
             ]);
 
             $responsePayload = json_decode(

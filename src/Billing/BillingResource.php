@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class BillingResource
 {
-    private const string BASE_PATH = '/billing';
+    private const string BASE_PATH = 'billing';
 
     public function __construct(
         private Client $client,

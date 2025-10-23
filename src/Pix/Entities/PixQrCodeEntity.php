@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Entities;
+namespace AbacatePay\Pix\Entities;
 
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingStatusEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingStatusEnum;
 use JsonSerializable;
 
 final readonly class PixQrCodeEntity implements JsonSerializable
 {
     /**
-     * @param  AbacatePayBillingMethodEnum[]  $methods
+     * @param  BillingMethodEnum[]  $methods
      */
     public function __construct(
         public string $id,
         public int $amount,
-        public AbacatePayBillingStatusEnum $status,
+        public BillingStatusEnum $status,
         public bool $dev_mode,
         public string $br_code,
         public array $methods,
@@ -33,11 +33,11 @@ final readonly class PixQrCodeEntity implements JsonSerializable
         return new self(
             id: $data['id'],
             amount: $data['amount'],
-            status: AbacatePayBillingStatusEnum::from($data['status']),
+            status: BillingStatusEnum::from($data['status']),
             dev_mode: $data['devMode'],
             br_code: $data['brCode'],
             methods: array_map(
-                AbacatePayBillingMethodEnum::from(...),
+                BillingMethodEnum::from(...),
                 $data['methods'] ?? []
             ),
             br_code_base64: $data['brCodeBase64'],

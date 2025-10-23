@@ -3,15 +3,16 @@
 declare(strict_types=1);
 
 use AbacatePay\Billing\BillingResource;
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingStatusEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingStatusEnum;
 use AbacatePay\Billing\Http\Request\CreateBillingRequest;
 use AbacatePay\Billing\Http\Request\ProductRequest;
 use AbacatePay\Customer\Http\Request\CustomerRequest;
 use AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -39,8 +40,7 @@ it('creates billing completely', function () {
             ],
             'allowCoupons' => false,
             'coupons' => [],
-        ],
-        'error' => null,
+        ]
     ];
 
     $handler = new MockHandler([
@@ -52,11 +52,11 @@ it('creates billing completely', function () {
     $billingResource = new BillingResource(client: $client);
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [
             new ProductRequest(
-                external_id: 'prod-1234',
+                externalId: 'prod-1234',
                 name: 'Assinatura de Programa Fitness',
                 description: 'Acesso ao programa fitness premium por 1 mês.',
                 quantity: 2,
@@ -83,10 +83,10 @@ it('creates billing completely', function () {
     expect($response->data->id)->toBe('bill_123456')
         ->and($response->data->url)->toBe('https://pay.abacatepay.com/bill-5678')
         ->and($response->data->amount)->toBe(4000)
-        ->and($response->data->status)->toBe(AbacatePayBillingStatusEnum::Pending)
+        ->and($response->data->status)->toBe(BillingStatusEnum::Pending)
         ->and($response->data->dev_mode)->toBeTrue()
-        ->and($response->data->methods[0])->toBe(AbacatePayBillingMethodEnum::Pix)
-        ->and($response->data->frequency)->toBe(AbacatePayBillingFrequencyEnum::OneTime)
+        ->and($response->data->methods[0])->toBe(BillingMethodEnum::Pix)
+        ->and($response->data->frequency)->toBe(BillingFrequencyEnum::OneTime)
         ->and($response->data->next_billing)->toBeNull()
         ->and($response->data->allow_coupons)->toBeFalse()
         ->and($response->data->customer->name)->toBe('Daniel Lima');
@@ -98,15 +98,16 @@ it('throws exception on unauthorized', function () {
             'Unauthorized',
             new Request('GET', 'test-abacatepay'),
             new Response(401, [], json_encode(['error' => 'Unauthorized'], JSON_THROW_ON_ERROR))
-        )]);
+        )
+    ]);
 
     $client = new Client(['handler' => $handler]);
 
     $billingResource = new BillingResource(client: $client);
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
@@ -118,4 +119,34 @@ it('throws exception on unauthorized', function () {
     );
 
     expect(fn () => $billingResource->create($request))->toThrow(AbacatePayException::class);
+});
+
+it('throws internal server error exception', function () {
+    $handler = new MockHandler([
+        new ServerException(
+            'Internal Server Error',
+            new Request('POST', 'test-abacatepay'),
+            new Response(500, [], json_encode(['error' => 'server crashed'], JSON_THROW_ON_ERROR))
+        )
+    ]);
+
+    $client = new Client(['handler' => $handler]);
+
+    $billingResource = new BillingResource(client: $client);
+
+    $request = new CreateBillingRequest(
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
+        products: [],
+        return_url: 'https://example.com/return',
+        completion_url: 'https://example.com/complete',
+        customer_id: null,
+        customer: null,
+        allow_coupons: false,
+        coupons: [],
+        external_id: null
+    );
+
+    expect(fn () => $billingResource->create($request))
+        ->toThrow(AbacatePayException::class, 'Internal Server Error');
 });

@@ -6,15 +6,15 @@ namespace AbacatePay;
 
 use AbacatePay\Billing\BillingResource;
 use AbacatePay\Customer\CustomerResource;
-use AbacatePay\WithDraw\WithDrawResource;
+use AbacatePay\Pix\PixResource;
+use AbacatePay\Withdraw\WithdrawResource;
 use GuzzleHttp\Client;
-use PixResource;
 
 final readonly class AbacatePayClient
 {
     private Client $client;
 
-    private const string BASE_URL = 'https://api.abacatepay.com/v1';
+    private const string BASE_URL = 'https://api.abacatepay.com/v1/';
 
     public function __construct(
         private string $token,
@@ -43,8 +43,8 @@ final readonly class AbacatePayClient
         return new PixResource($this->client);
     }
 
-    public function withDraw(): WithDrawResource
+    public function withdraw(): WithdrawResource
     {
-        return new WithDrawResource($this->client);
+        return new WithdrawResource($this->client);
     }
 }

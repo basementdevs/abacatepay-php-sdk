@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
 use AbacatePay\Billing\Http\Request\CreateBillingRequest;
 use AbacatePay\Billing\Http\Request\ProductRequest;
 use AbacatePay\Customer\Http\Request\CustomerRequest;
@@ -11,7 +11,7 @@ use AbacatePay\Customer\Http\Request\CustomerRequest;
 it('creates request with all fields', function () {
     $products = [
         new ProductRequest(
-            external_id: 'prod-1234',
+            externalId: 'prod-1234',
             name: 'Assinatura de Programa Fitness',
             description: 'Acesso ao programa fitness premium por 1 mês.',
             quantity: 2,
@@ -28,8 +28,8 @@ it('creates request with all fields', function () {
     );
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: $products,
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
@@ -40,9 +40,9 @@ it('creates request with all fields', function () {
         external_id: 'seu_id_123'
     );
 
-    expect($request->frequency)->toBe(AbacatePayBillingFrequencyEnum::OneTime)
+    expect($request->frequency)->toBe(BillingFrequencyEnum::OneTime)
         ->and($request->methods)->toHaveCount(1)
-        ->and($request->methods[0])->toBe(AbacatePayBillingMethodEnum::Pix)
+        ->and($request->methods[0])->toBe(BillingMethodEnum::Pix)
         ->and($request->products)->toHaveCount(1)
         ->and($request->return_url)->toBe('https://example.com/billing')
         ->and($request->completion_url)->toBe('https://example.com/completion')
@@ -56,7 +56,7 @@ it('creates request with all fields', function () {
 it('converts to array with all fields', function () {
     $products = [
         new ProductRequest(
-            external_id: 'prod-1234',
+            externalId: 'prod-1234',
             name: 'Product Name',
             description: 'Product Description',
             quantity: 2,
@@ -73,8 +73,8 @@ it('converts to array with all fields', function () {
     );
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::MultiplePayments,
-        methods: [AbacatePayBillingMethodEnum::Pix, AbacatePayBillingMethodEnum::Card],
+        frequency: BillingFrequencyEnum::MultiplePayments,
+        methods: [BillingMethodEnum::Pix, BillingMethodEnum::Card],
         products: $products,
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
@@ -90,7 +90,7 @@ it('converts to array with all fields', function () {
     expect($array)->toHaveKeys([
         'frequency', 'methods', 'products', 'returnUrl', 'completionUrl',
         'customerId', 'customer', 'allowCoupons', 'coupons', 'externalId'
-    ])->and($array['frequency'])->toBe(AbacatePayBillingFrequencyEnum::MultiplePayments)
+    ])->and($array['frequency'])->toBe(BillingFrequencyEnum::MultiplePayments)
         ->and($array['methods'])->toHaveCount(2)
         ->and($array['allowCoupons'])->toBeTrue()
         ->and($array['customerId'])->toBe('cust_123')
@@ -99,8 +99,8 @@ it('converts to array with all fields', function () {
 
 it('converts to array without optional fields', function () {
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
@@ -121,8 +121,8 @@ it('converts to array without optional fields', function () {
 
 it('converts to array with customer_id only', function () {
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
@@ -150,8 +150,8 @@ it('converts to array with customer object only', function () {
     );
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
@@ -177,8 +177,8 @@ it('converts to array with multiple products', function () {
     ];
 
     $request = new CreateBillingRequest(
-        frequency: AbacatePayBillingFrequencyEnum::OneTime,
-        methods: [AbacatePayBillingMethodEnum::Pix],
+        frequency: BillingFrequencyEnum::OneTime,
+        methods: [BillingMethodEnum::Pix],
         products: $products,
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',

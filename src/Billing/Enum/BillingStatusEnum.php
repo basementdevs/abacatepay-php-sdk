@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AbacatePay\Billing\Enum;
 
-enum AbacatePayBillingStatusEnum: string
+enum BillingStatusEnum: string
 {
     case Pending = 'PENDING';
     case Expired = 'EXPIRED';

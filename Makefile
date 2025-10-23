@@ -21,7 +21,7 @@ pint:
 
 test:
 	@echo ">> Executando Pest..."
-	@$(PEST) --colors=always --testdox
+	@$(PEST) --colors=always
 
 fix:
 	@echo ">> Corrigindo código automaticamente..."

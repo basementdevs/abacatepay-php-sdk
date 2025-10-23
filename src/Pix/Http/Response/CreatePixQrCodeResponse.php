@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AbacatePay\Pix\Http\Response;
 
-use Entities\PixQrCodeEntity;
+use AbacatePay\Pix\Entities\PixQrCodeEntity;
 
 final readonly class CreatePixQrCodeResponse
 {

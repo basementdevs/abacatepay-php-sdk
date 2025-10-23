@@ -14,6 +14,16 @@ final readonly class PixCustomerRequest
     ) {
     }
 
+    public static function make(array $data): self
+    {
+        return new self(
+            $data['name'],
+            $data['cellphone'],
+            $data['email'],
+            $data['taxId'],
+        );
+    }
+
     public function toArray(): array
     {
         return [

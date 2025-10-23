@@ -1,0 +1,106 @@
+<?php
+
+declare(strict_types=1);
+
+use AbacatePay\Exception\AbacatePayException;
+use AbacatePay\Withdraw\Enums\WithdrawKindEnum;
+use AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
+use AbacatePay\Withdraw\Enums\WithdrawPixTypeEnum;
+use AbacatePay\Withdraw\Enums\WithdrawStatusEnum;
+use AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
+use AbacatePay\Withdraw\Http\Request\WithdrawPixRequest;
+use AbacatePay\Withdraw\WithdrawResource;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+
+beforeEach(function () {
+    $this->requestDto = new CreateWithdrawRequest(
+        externalId: 'tran_1234567890abcdef',
+        method: WithdrawMethodsEnum::Pix,
+        amount: 100,
+        pix: new WithdrawPixRequest(WithdrawPixTypeEnum::Cpf, '123.456.789-10'),
+        description: 'description',
+    );
+});
+
+it('should be able to withdraw something', function (): void {
+    $data = [
+        'data' => [
+            'id' => 'tran_1234567890abcdef',
+            'status' => WithdrawStatusEnum::Pending->value,
+            'devMode' => true,
+            'receiptUrl' => 'https://abacatepay.com/receipt/tran_1234567890abcdef',
+            'kind' => WithdrawKindEnum::Withdraw->value,
+            'amount' => 5000,
+            'platformFee' => 80,
+            'externalId' => 'withdraw-1234',
+            'createdAt' => '2024-12-06T18:56:15.538Z',
+            'updatedAt' => '2024-12-06T18:56:15.538Z',
+        ],
+    ];
+
+    $handler = new MockHandler([
+        new Response(200, [], json_encode($data)),
+    ]);
+
+    $client = new Client(['handler' => $handler]);
+
+    $withDrawResource = new WithdrawResource(client: $client);
+
+    $response = $withDrawResource->withdraw(
+        request: $this->requestDto,
+    );
+
+    expect($response->data->id)->toBe('tran_1234567890abcdef')
+        ->and($response->data->status)->toBe(WithdrawStatusEnum::Pending)
+        ->and($response->data->amount)->toBe(5000)
+        ->and($response->data->platformFee)->toBe(80)
+        ->and($response->data->devMode)->toBeTrue()
+        ->and($response->data->kind)->toBe(WithdrawKindEnum::Withdraw)
+        ->and($response->data->externalId)->toBe('withdraw-1234')
+        ->and($response->data->created_at)->toBe('2024-12-06T18:56:15.538Z')
+        ->and($response->data->updated_at)->toBe('2024-12-06T18:56:15.538Z');
+});
+
+it('throws unauthorized exception', function (): void {
+    $handler = new MockHandler([
+        new ClientException(
+            'Unauthorized',
+            new Request('GET', 'test-abacatepay'),
+            new Response(401, [], json_encode(['error' => 'Unauthorized'], JSON_THROW_ON_ERROR))
+        )
+    ]);
+
+    $client = new Client(['handler' => $handler]);
+
+    $withDrawResource = new WithdrawResource(client: $client);
+
+    expect(fn () => $withDrawResource->withdraw(request: $this->requestDto))
+        ->toThrow(
+            AbacatePayException::class,
+            'Token de autenticação inválido ou ausente.'
+        );
+});
+
+it('throws internal server error exception', function (): void {
+    $handler = new MockHandler([
+        new ServerException(
+            'Internal Server Error',
+            new Request('POST', 'test-abacatepay'),
+            new Response(500, [], json_encode(['error' => 'server crashed'], JSON_THROW_ON_ERROR))
+        )
+    ]);
+
+    $client = new Client(['handler' => $handler]);
+    $withDrawResource = new WithdrawResource(client: $client);
+
+    expect(fn () => $withDrawResource->withdraw(request: $this->requestDto))
+        ->toThrow(
+            AbacatePayException::class,
+            'Internal Server Error'
+        );
+});

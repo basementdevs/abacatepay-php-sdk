@@ -11,6 +11,13 @@ final readonly class PixMetadataRequest
     ) {
     }
 
+    public static function make(array $data): self
+    {
+        return new self(
+            $data['externalId'],
+        );
+    }
+
     public function toArray(): array
     {
         return [

@@ -2,23 +2,24 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\WithDraw\Http\Request;
+namespace AbacatePay\Withdraw\Http\Request;
 
-use AbacatePay\WithDraw\Enums\AvailableWithDrawPixTypeEnum;
+use AbacatePay\Withdraw\Enums\WithdrawPixTypeEnum;
 use JsonSerializable;
 
-final readonly class WithDrawPixRequest implements JsonSerializable
+final readonly class WithdrawPixRequest implements JsonSerializable
 {
     public function __construct(
-        public AvailableWithDrawPixTypeEnum $type,
-        public string                       $key
-    ) {
+        public WithdrawPixTypeEnum $type,
+        public string              $key
+    )
+    {
     }
 
     public static function make(array $data): self
     {
         return new self(
-            type: AvailableWithDrawPixTypeEnum::from($data['type']),
+            type: WithdrawPixTypeEnum::from($data['type']),
             key: $data['key'],
         );
     }

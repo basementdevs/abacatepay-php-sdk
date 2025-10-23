@@ -3,7 +3,7 @@
 declare(strict_types=1);
 use AbacatePay\Billing\Collection\BillingEntityCollection;
 use AbacatePay\Billing\Entities\BillingEntity;
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
 
 beforeEach(function () {
     $this->createBillingData = function (string $id, int $amount, string $status): array {
@@ -165,7 +165,7 @@ it('collection with complex billing data', function () {
         ->and($billing->amount)->toBe(15000)
         ->and($billing->methods)->toHaveCount(2)
         ->and($billing->products)->toHaveCount(2)
-        ->and($billing->frequency)->toBe(AbacatePayBillingFrequencyEnum::MultiplePayments)
+        ->and($billing->frequency)->toBe(BillingFrequencyEnum::MultiplePayments)
         ->and($billing->customer)->not->toBeNull()
         ->and($billing->allow_coupons)->toBeTrue()
         ->and($billing->coupons)->toHaveCount(2);

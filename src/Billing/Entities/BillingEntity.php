@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AbacatePay\Billing\Entities;
 
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingStatusEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingStatusEnum;
 use AbacatePay\Customer\Entities\CustomerEntity;
 use JsonSerializable;
 
 final readonly class BillingEntity implements JsonSerializable
 {
     /**
-     * @param  AbacatePayBillingMethodEnum[]  $methods
+     * @param  BillingMethodEnum[]  $methods
      * @param  BillingProductEntity[]  $products
      * @param  string[]  $coupons
      */
@@ -21,11 +21,11 @@ final readonly class BillingEntity implements JsonSerializable
         public string $id,
         public string $url,
         public int $amount,
-        public AbacatePayBillingStatusEnum $status,
+        public BillingStatusEnum $status,
         public bool $dev_mode,
         public array $methods,
         public array $products,
-        public AbacatePayBillingFrequencyEnum $frequency,
+        public BillingFrequencyEnum $frequency,
         public ?string $next_billing,
         public ?CustomerEntity $customer,
         public ?bool $allow_coupons,
@@ -39,17 +39,17 @@ final readonly class BillingEntity implements JsonSerializable
             id: $data['id'],
             url: $data['url'],
             amount: $data['amount'],
-            status: AbacatePayBillingStatusEnum::from($data['status']),
+            status: BillingStatusEnum::from($data['status']),
             dev_mode: $data['devMode'],
             methods: array_map(
-                AbacatePayBillingMethodEnum::from(...),
+                BillingMethodEnum::from(...),
                 $data['methods'] ?? []
             ),
             products: array_map(
                 BillingProductEntity::fromArray(...),
                 $data['products'] ?? []
             ),
-            frequency: AbacatePayBillingFrequencyEnum::from($data['frequency']),
+            frequency: BillingFrequencyEnum::from($data['frequency']),
             next_billing: isset($data['nextBilling']) && $data['nextBilling'] !== 'null'
                 ? $data['nextBilling']
                 : null,
@@ -69,7 +69,7 @@ final readonly class BillingEntity implements JsonSerializable
             'amount' => $this->amount,
             'status' => $this->status->value,
             'devMode' => $this->dev_mode,
-            'methods' => array_map(fn (AbacatePayBillingMethodEnum $method) => $method->value, $this->methods),
+            'methods' => array_map(fn (BillingMethodEnum $method) => $method->value, $this->methods),
             'products' => array_map(
                 fn (BillingProductEntity $product): array => $product->jsonSerialize(),
                 $this->products

@@ -10,9 +10,10 @@ final readonly class CreateCustomerRequest
         public string $name,
         public string $cellphone,
         public string $email,
-        public string $tax_id,
+        public string $taxId,
     ) {
     }
+
 
     public function toArray(): array
     {
@@ -20,7 +21,7 @@ final readonly class CreateCustomerRequest
             'name' => $this->name,
             'cellphone' => $this->cellphone,
             'email' => $this->email,
-            'tax_id' => $this->tax_id,
+            'taxId' => $this->taxId,
         ];
     }
 }

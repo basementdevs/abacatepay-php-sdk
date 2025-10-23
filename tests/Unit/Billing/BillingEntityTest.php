@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use AbacatePay\Billing\Entities\BillingEntity;
 use AbacatePay\Billing\Entities\BillingProductEntity;
-use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
-use AbacatePay\Billing\Enum\AbacatePayBillingStatusEnum;
+use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use AbacatePay\Billing\Enum\BillingMethodEnum;
+use AbacatePay\Billing\Enum\BillingStatusEnum;
 use AbacatePay\Customer\Entities\CustomerEntity;
 
 it('creates billing entity from array', function () {
@@ -38,10 +38,10 @@ it('creates billing entity from array', function () {
     expect($entity->id)->toBe('bill_123456')
         ->and($entity->url)->toBe('https://pay.abacatepay.com/bill-5678')
         ->and($entity->amount)->toBe(4000)
-        ->and($entity->methods[0])->toBe(AbacatePayBillingMethodEnum::Pix)
+        ->and($entity->methods[0])->toBe(BillingMethodEnum::Pix)
         ->and($entity->products)->toHaveCount(1)
         ->and($entity->products[0])->toBeInstanceOf(BillingProductEntity::class)
-        ->and($entity->frequency)->toBe(AbacatePayBillingFrequencyEnum::OneTime)
+        ->and($entity->frequency)->toBe(BillingFrequencyEnum::OneTime)
         ->and($entity->next_billing)->toBeNull()
         ->and($entity->customer)->toBeInstanceOf(CustomerEntity::class)
         ->and($entity->allow_coupons)->toBeFalse()
@@ -86,7 +86,7 @@ it('sets actual next billing date', function () {
 
     $entity = BillingEntity::fromArray($data);
     expect($entity->next_billing)->toBe('2025-11-23')
-        ->and($entity->frequency)->toBe(AbacatePayBillingFrequencyEnum::MultiplePayments);
+        ->and($entity->frequency)->toBe(BillingFrequencyEnum::MultiplePayments);
 });
 
 it('handles multiple methods and coupons', function () {
@@ -107,9 +107,9 @@ it('handles multiple methods and coupons', function () {
 
     $entity = BillingEntity::fromArray($data);
     expect($entity->methods)->toHaveCount(3)
-        ->and($entity->methods[0])->toBe(AbacatePayBillingMethodEnum::Pix)
-        ->and($entity->methods[1])->toBe(AbacatePayBillingMethodEnum::Card)
-        ->and($entity->methods[2])->toBe(AbacatePayBillingMethodEnum::Pix)
+        ->and($entity->methods[0])->toBe(BillingMethodEnum::Pix)
+        ->and($entity->methods[1])->toBe(BillingMethodEnum::Card)
+        ->and($entity->methods[2])->toBe(BillingMethodEnum::Pix)
         ->and($entity->coupons)->toHaveCount(2);
 });
 
@@ -194,7 +194,7 @@ it('handles empty arrays', function () {
     expect($entity->methods)->toBeEmpty()
         ->and($entity->products)->toBeEmpty()
         ->and($entity->coupons)->toBeEmpty()
-        ->and($entity->status)->toBe(AbacatePayBillingStatusEnum::Cancelled);
+        ->and($entity->status)->toBe(BillingStatusEnum::Cancelled);
 });
 
 it('handles all statuses', function () {
@@ -217,7 +217,7 @@ it('handles all statuses', function () {
         ];
 
         $entity = BillingEntity::fromArray($data);
-        expect($entity->status)->toBe(AbacatePayBillingStatusEnum::from($status));
+        expect($entity->status)->toBe(BillingStatusEnum::from($status));
     }
 });
 
@@ -241,6 +241,6 @@ it('handles all frequencies', function () {
         ];
 
         $entity = BillingEntity::fromArray($data);
-        expect($entity->frequency)->toBe(AbacatePayBillingFrequencyEnum::from($frequency));
+        expect($entity->frequency)->toBe(BillingFrequencyEnum::from($frequency));
     }
 });

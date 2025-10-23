@@ -20,11 +20,4 @@ final class AbacatePayException extends Exception
     {
         return new self($message, 401);
     }
-
-    public static function fromResponse(int $statusCode, array $responseBody): self
-    {
-        $message = $responseBody['error'] ?? 'Erro desconhecido';
-
-        return new self($message, $statusCode, $responseBody);
-    }
 }
