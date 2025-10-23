@@ -15,7 +15,8 @@ final readonly class WithDrawRequest implements JsonSerializable
         public string                       $amount,
         public WithDrawPixRequest           $pix,
         public ?string                      $description = null,
-    ) {}
+    ) {
+    }
 
     public static function make(array $data): self
     {

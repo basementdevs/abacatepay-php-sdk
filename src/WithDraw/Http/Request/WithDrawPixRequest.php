@@ -12,7 +12,8 @@ final readonly class WithDrawPixRequest implements JsonSerializable
     public function __construct(
         public AvailableWithDrawPixTypeEnum $type,
         public string                       $key
-    ) {}
+    ) {
+    }
 
     public static function make(array $data): self
     {

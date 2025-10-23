@@ -10,7 +10,8 @@ final readonly class WithDrawResponse
 {
     public function __construct(
         public WithDrawEntity $data,
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

@@ -18,7 +18,8 @@ final readonly class WithDrawResource
 
     public function __construct(
         private Client $client
-    ) {}
+    ) {
+    }
 
     /**
      * @throws AbacatePayException
