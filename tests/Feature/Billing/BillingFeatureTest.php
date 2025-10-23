@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AbacatePay\AbacatePayClient;
+use AbacatePay\Billing\BillingResource;
 use AbacatePay\Billing\Enum\AbacatePayBillingFrequencyEnum;
 use AbacatePay\Billing\Enum\AbacatePayBillingMethodEnum;
 use AbacatePay\Billing\Enum\AbacatePayBillingStatusEnum;
@@ -11,8 +11,9 @@ use AbacatePay\Billing\Http\Request\ProductRequest;
 use AbacatePay\Customer\Http\Request\CustomerRequest;
 use AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 it('creates billing completely', function () {
@@ -28,22 +29,27 @@ it('creates billing completely', function () {
             'frequency' => 'ONE_TIME',
             'nextBilling' => 'null',
             'customer' => [
-                'id' => 'cust_123456', 'metadata' => [
-                    'name' => 'Daniel Lima', 'cellphone' => '(11) 4002-8922', 'email' => 'daniel_lima@abacatepay.com',
-                    'taxId' => '123.456.789-01'
-                ]
+                'id' => 'cust_123456',
+                'metadata' => [
+                    'name' => 'Daniel Lima',
+                    'cellphone' => '(11) 4002-8922',
+                    'email' => 'daniel_lima@abacatepay.com',
+                    'taxId' => '123.456.789-01',
+                ],
             ],
             'allowCoupons' => false,
-            'coupons' => []
+            'coupons' => [],
         ],
-        'error' => null
+        'error' => null,
     ];
 
-    $client = new MockHandler([new Response(200, [], json_encode($responseData))]);
-    $abacateClient = new AbacatePayClient('test_token');
-    $reflection = new ReflectionClass($abacateClient);
-    $prop = $reflection->getProperty('client');
-    $prop->setValue($abacateClient, new Client(['handler' => HandlerStack::create($client)]));
+    $handler = new MockHandler([
+        new Response(200, [], json_encode($responseData)),
+    ]);
+
+    $client = new Client(['handler' => $handler]);
+
+    $billingResource = new BillingResource(client: $client);
 
     $request = new CreateBillingRequest(
         frequency: AbacatePayBillingFrequencyEnum::OneTime,
@@ -55,7 +61,7 @@ it('creates billing completely', function () {
                 description: 'Acesso ao programa fitness premium por 1 mês.',
                 quantity: 2,
                 price: 2000
-            )
+            ),
         ],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
@@ -72,7 +78,7 @@ it('creates billing completely', function () {
         external_id: 'seu_id_123'
     );
 
-    $response = $abacateClient->billing()->create($request);
+    $response = $billingResource->create($request);
 
     expect($response->data->id)->toBe('bill_123456')
         ->and($response->data->url)->toBe('https://pay.abacatepay.com/bill-5678')
@@ -83,16 +89,20 @@ it('creates billing completely', function () {
         ->and($response->data->frequency)->toBe(AbacatePayBillingFrequencyEnum::OneTime)
         ->and($response->data->next_billing)->toBeNull()
         ->and($response->data->allow_coupons)->toBeFalse()
-        ->and($response->data->customer->metadata['name'])->toBe('Daniel Lima');
+        ->and($response->data->customer->name)->toBe('Daniel Lima');
 });
 
 it('throws exception on unauthorized', function () {
-    $client = new MockHandler([new Response(401, [], json_encode(['error' => 'Unauthorized']))]);
-    $abacateClient = new AbacatePayClient('token');
-    $reflection = new \ReflectionClass($abacateClient);
-    $prop = $reflection->getProperty('client');
-    $prop->setAccessible(true);
-    $prop->setValue($abacateClient, new Client(['handler' => HandlerStack::create($client)]));
+    $handler = new MockHandler([
+        new ClientException(
+            'Unauthorized',
+            new Request('GET', 'test-abacatepay'),
+            new Response(401, [], json_encode(['error' => 'Unauthorized'], JSON_THROW_ON_ERROR))
+        )]);
+
+    $client = new Client(['handler' => $handler]);
+
+    $billingResource = new BillingResource(client: $client);
 
     $request = new CreateBillingRequest(
         frequency: AbacatePayBillingFrequencyEnum::OneTime,
@@ -107,5 +117,5 @@ it('throws exception on unauthorized', function () {
         external_id: null
     );
 
-    expect(fn () => $abacateClient->billing()->create($request))->toThrow(AbacatePayException::class);
+    expect(fn () => $billingResource->create($request))->toThrow(AbacatePayException::class);
 });

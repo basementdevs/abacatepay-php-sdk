@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace AbacatePay;
 
+use AbacatePay\Billing\BillingResource;
 use AbacatePay\Customer\CustomerResource;
 use GuzzleHttp\Client;
+use PixResource;
 
 final readonly class AbacatePayClient
 {
