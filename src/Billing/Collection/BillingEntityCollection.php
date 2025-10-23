@@ -12,7 +12,7 @@ use IteratorAggregate;
 final class BillingEntityCollection implements Countable, IteratorAggregate
 {
     /** @var BillingEntity[] */
-    private array $items;
+    private array $items = [];
 
     /**
      * @param  BillingEntity[]  $items

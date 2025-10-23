@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace AbacatePay;
+
 use AbacatePay\Customer\CustomerResource;
 use GuzzleHttp\Client;
 

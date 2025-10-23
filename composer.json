@@ -21,7 +21,8 @@
   "require-dev": {
     "pestphp/pest": "^4.1",
     "laravel/pint": "^v1.25.1",
-    "rector/rector": "^2.2"
+    "rector/rector": "^2.2",
+    "mockery/mockery": "^1.6"
   },
   "config": {
     "allow-plugins": {

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace AbacatePay\Billing;
+
 use AbacatePay\Billing\Http\Request\CreateBillingRequest;
 use AbacatePay\Billing\Http\Response\CreateBillingResponse;
 use AbacatePay\Billing\Http\Response\ListBillingResponse;

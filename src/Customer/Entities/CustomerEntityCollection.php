@@ -11,7 +11,7 @@ use IteratorAggregate;
 class CustomerEntityCollection implements Countable, IteratorAggregate
 {
     /** @var CustomerEntity[] */
-    private array $items;
+    private array $items = [];
 
     /**
      * @param  CustomerEntity[]  $items
