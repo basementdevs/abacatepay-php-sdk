@@ -4,23 +4,38 @@ SDK para integração com a **API AbacatePay**.
 Permite gerenciar clientes, cobranças e transações de forma simples usando PHP.
 
 ---
+## Requisitos
+
+- PHP 8.4 ou maior
+- Composer
+- Conta na AbacatePay
+- API Token
 
 ## Instalação
 
-### Via Composer (quando publicado)
-
 ```bash
-composer require abacatepay/sdk
+composer require abacatepay/client-php
 ```
+
+## Comandos de Desenvolvimento
+
+| Comando       | Descrição                                                         |
+| ------------- | ----------------------------------------------------------------- |
+| `make all`    | Executa todos os passos de qualidade e teste: Pint, Rector e Pest |
+| `make rector` | Analisa o código com Rector e sugere refatorações                 |
+| `make pint`   | Formata o código automaticamente usando Pint                      |
+| `make test`   | Executa os testes automatizados com Pest                          |
+| `make fix`    | Aplica correções automáticas no código com Pint e Rector          |
+
 
 ---
 
 ## Inicialização
 
 ```php
-use AbacatePay\AbacatePay;
+use AbacatePay\AbacatePayClient;
 
-$sdk = new AbacatePay('seu-token-aqui');
+$sdk = new AbacatePayClient('seu-token-aqui');
 ```
 
 O token deve ser um **Bearer Token** válido fornecido pelo painel da AbacatePay.
@@ -65,30 +80,11 @@ foreach ($customers as $customer) {
 
 ---
 
-### Tratamento de Erros
-
-Todas as operações podem lançar:
-
-* `AbacatePay\Exception\AbacatePayException`
-* `JsonException`
-
-Exemplo:
-
-```php
-try {
-    $sdk->customer()->list();
-} catch (AbacatePayException $e) {
-    echo "Erro: {$e->getMessage()} ({$e->getCode()})";
-}
-```
-
----
-
-## Exceções Comuns
+## Exceções
 
 | Código | Exceção                               | Descrição                 |
 | ------ | ------------------------------------- | ------------------------- |
-| 401    | `AbacatePayException::unauthorized()` | Token inválido ou ausente |
+| 401    | `AbacatePayException::unauthorized()` | Token de autenticação inválido ou ausente. |
 | 500    | `AbacatePayException`                 | Erro interno na API       |
 
 ---
@@ -99,18 +95,9 @@ try {
 2. Crie um branch: `git checkout -b feature/nova-funcionalidade`
 3. Rode os testes com **Pest**:
 
-   ```bash
-   composer test
-   ```
+```bash
+  composer test
+```
 4. Envie um Pull Request
 
 ---
-
-## Licença
-
-MIT © AbacatePay
-
----
-
-Quer que eu adicione uma seção com a **documentação dos modelos** (`CreateCustomerRequest`, `CreateCustomerResponse`, `CustomerEntity`)? Isso completa o guia para quem vai usar o SDK.
-********
