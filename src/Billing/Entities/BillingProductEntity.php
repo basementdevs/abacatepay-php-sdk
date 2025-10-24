@@ -10,7 +10,7 @@ final readonly class BillingProductEntity implements JsonSerializable
 {
     public function __construct(
         public string $id,
-        public string $external_id,
+        public string $externalId,
         public int $quantity,
     ) {
     }
@@ -19,7 +19,7 @@ final readonly class BillingProductEntity implements JsonSerializable
     {
         return new self(
             id: $data['id'],
-            external_id: $data['externalId'],
+            externalId: $data['externalId'],
             quantity: $data['quantity'],
         );
     }
@@ -28,7 +28,7 @@ final readonly class BillingProductEntity implements JsonSerializable
     {
         return [
             'id' => $this->id,
-            'external_id' => $this->external_id,
+            'externalId' => $this->externalId,
             'quantity' => $this->quantity,
         ];
     }

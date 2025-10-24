@@ -60,7 +60,7 @@ it('creates a billing successfully', function () {
     $this->clientMock
         ->shouldReceive('post')
         ->once()
-        ->with('/billing/create', Mockery::type('array'))
+        ->with('billing/create', Mockery::type('array'))
         ->andReturn($response);
 
     $request = new CreateBillingRequest(
@@ -77,7 +77,7 @@ it('creates a billing successfully', function () {
         ],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
-        customer_id: 'cust_abcdefghij',
+        customerId: 'cust_abcdefghij',
         customer: new CustomerRequest(
             'id123',
             'Daniel Lima',
@@ -87,7 +87,7 @@ it('creates a billing successfully', function () {
         ),
         allow_coupons: false,
         coupons: ['ABKT10', 'ABKT5', 'PROMO10'],
-        external_id: 'seu_id_123'
+        externalId: 'seu_id_123'
     );
 
     $result = $this->billingResource->create($request);
@@ -113,11 +113,11 @@ it('throws unauthorized exception on create billing', function () {
         products: [],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $this->billingResource->create($billingRequest);
@@ -153,7 +153,7 @@ it('lists billing successfully', function () {
     $this->clientMock
         ->shouldReceive('get')
         ->once()
-        ->with('/billing/list')
+        ->with('billing/list')
         ->andReturn($response);
 
     $result = $this->billingResource->list();
@@ -206,11 +206,11 @@ it('creates billing with minimal data', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: true,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $result = $this->billingResource->create($request);

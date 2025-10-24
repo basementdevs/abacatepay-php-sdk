@@ -33,11 +33,11 @@ it('creates request with all fields', function () {
         products: $products,
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
-        customer_id: 'cust_abcdefghij',
+        customerId: 'cust_abcdefghij',
         customer: $customer,
         allow_coupons: false,
         coupons: ['ABKT10', 'ABKT5', 'PROMO10'],
-        external_id: 'seu_id_123'
+        externalId: 'seu_id_123'
     );
 
     expect($request->frequency)->toBe(BillingFrequencyEnum::OneTime)
@@ -46,11 +46,11 @@ it('creates request with all fields', function () {
         ->and($request->products)->toHaveCount(1)
         ->and($request->return_url)->toBe('https://example.com/billing')
         ->and($request->completion_url)->toBe('https://example.com/completion')
-        ->and($request->customer_id)->toBe('cust_abcdefghij')
+        ->and($request->customerId)->toBe('cust_abcdefghij')
         ->and($request->customer)->toBeInstanceOf(CustomerRequest::class)
         ->and($request->allow_coupons)->toBeFalse()
         ->and($request->coupons)->toHaveCount(3)
-        ->and($request->external_id)->toBe('seu_id_123');
+        ->and($request->externalId)->toBe('seu_id_123');
 });
 
 it('converts to array with all fields', function () {
@@ -78,11 +78,11 @@ it('converts to array with all fields', function () {
         products: $products,
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: 'cust_123',
+        customerId: 'cust_123',
         customer: $customer,
         allow_coupons: true,
         coupons: ['PROMO10'],
-        external_id: 'ext_123'
+        externalId: 'ext_123'
     );
 
     $array = $request->toArray();
@@ -104,11 +104,11 @@ it('converts to array without optional fields', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $array = $request->toArray();
@@ -119,18 +119,18 @@ it('converts to array without optional fields', function () {
         ]);
 });
 
-it('converts to array with customer_id only', function () {
+it('converts to array with customerId only', function () {
     $request = new CreateBillingRequest(
         frequency: BillingFrequencyEnum::OneTime,
         methods: [BillingMethodEnum::Pix],
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: 'cust_existing',
+        customerId: 'cust_existing',
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $array = $request->toArray();
@@ -155,11 +155,11 @@ it('converts to array with customer object only', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: $customer,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $array = $request->toArray();
@@ -182,11 +182,11 @@ it('converts to array with multiple products', function () {
         products: $products,
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     $array = $request->toArray();

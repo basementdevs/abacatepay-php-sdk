@@ -65,7 +65,7 @@ it('creates billing completely', function () {
         ],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
-        customer_id: 'cust_abcdefghij',
+        customerId: 'cust_abcdefghij',
         customer: new CustomerRequest(
             id: 'id123',
             name: 'Daniel Lima',
@@ -75,7 +75,7 @@ it('creates billing completely', function () {
         ),
         allow_coupons: false,
         coupons: ['ABKT10', 'ABKT5', 'PROMO10'],
-        external_id: 'seu_id_123'
+        externalId: 'seu_id_123'
     );
 
     $response = $billingResource->create($request);
@@ -111,11 +111,11 @@ it('throws exception on unauthorized', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     expect(fn () => $billingResource->create($request))->toThrow(AbacatePayException::class);
@@ -140,11 +140,11 @@ it('throws internal server error exception', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customer_id: null,
+        customerId: null,
         customer: null,
         allow_coupons: false,
         coupons: [],
-        external_id: null
+        externalId: null
     );
 
     expect(fn () => $billingResource->create($request))
