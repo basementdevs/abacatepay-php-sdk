@@ -2,31 +2,30 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw;
+namespace AbacatePay\Coupon;
 
+use AbacatePay\Coupon\Entities\CouponCollection;
+use AbacatePay\Coupon\Http\Request\CreateCouponRequest;
+use AbacatePay\Coupon\Http\Response\CouponResponse;
 use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Withdraw\Entities\WithdrawEntityCollection;
-use AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
-use AbacatePay\Withdraw\Http\Response\WithdrawResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
-final readonly class WithdrawResource
+final readonly class CouponResource
 {
-    public const string BASE_PATH = 'withdraw';
+    public const string BASE_PATH = 'coupon';
 
     public function __construct(
-        private Client $client
+        private Client $client,
     ) {
     }
 
     /**
      * @throws AbacatePayException
-     * @throws JsonException
      */
-    public function withdraw(CreateWithdrawRequest $request): WithdrawResponse
+    public function create(CreateCouponRequest $request): CouponResponse
     {
         try {
             $response = $this->client->post(sprintf('%s/create', self::BASE_PATH), [
@@ -40,31 +39,8 @@ final readonly class WithdrawResource
                 JSON_THROW_ON_ERROR
             );
 
-            return WithdrawResponse::fromArray($responsePayload);
-        } catch (GuzzleException $e) {
-            match ($e->getCode()) {
-                Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
-                default => throw new AbacatePayException('Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR),
-            };
-        }
-    }
+            return CouponResponse::fromArray($responsePayload);
 
-    /**
-     * @throws AbacatePayException
-     */
-    public function findWithDrawById(string $externalId): WithdrawResponse
-    {
-        try {
-            $response = $this->client->get(sprintf('%s/get/%s', self::BASE_PATH, $externalId));
-
-            $responsePayload = json_decode(
-                $response->getBody()->getContents(),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            return WithdrawResponse::fromArray($responsePayload);
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
@@ -77,7 +53,7 @@ final readonly class WithdrawResource
      * @throws AbacatePayException
      * @throws JsonException
      */
-    public function listWithDraw(): WithdrawEntityCollection
+    public function list(): CouponCollection
     {
         try {
             $response = $this->client->get(sprintf('%s/list', self::BASE_PATH));
@@ -89,7 +65,7 @@ final readonly class WithdrawResource
                 JSON_THROW_ON_ERROR
             );
 
-            return WithdrawEntityCollection::fromArray($responsePayload);
+            return CouponCollection::fromArray($responsePayload);
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
