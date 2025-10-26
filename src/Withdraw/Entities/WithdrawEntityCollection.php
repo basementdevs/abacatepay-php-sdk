@@ -8,7 +8,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
-class WithDrawEntityCollection implements Countable, IteratorAggregate
+class WithdrawEntityCollection implements Countable, IteratorAggregate
 {
     /**
      * @var WithdrawEntity[]
@@ -50,7 +50,7 @@ class WithDrawEntityCollection implements Countable, IteratorAggregate
 
     public static function fromArray(array $data): self
     {
-        $collection = new self;
+        $collection = new self();
 
         foreach ($data['data'] as $item) {
             $collection->add(WithdrawEntity::fromArray($item));

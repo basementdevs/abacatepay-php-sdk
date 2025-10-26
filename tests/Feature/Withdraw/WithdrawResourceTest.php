@@ -114,9 +114,7 @@ it('should return an withdraw', function (): void {
     $client = new Client(['handler' => $handler]);
 
     $withDrawResource = new WithdrawResource(client: $client);
-    $response = $withDrawResource->findWithDraw(\AbacatePay\Withdraw\Http\Request\FindWithDrawRequest::make([
-        'externalId' => 'withdraw-1234',
-    ]));
+    $response = $withDrawResource->findWithDrawById('withdraw-1234');
 
     expect($response->data->id)->toBe('tran_1234567890abcdef')
         ->and($response->data->status)->toBe(WithdrawStatusEnum::Pending)

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AbacatePay;
 
 use AbacatePay\Billing\BillingResource;
+use AbacatePay\Coupon\CouponResource;
 use AbacatePay\Customer\CustomerResource;
 use AbacatePay\Pix\PixResource;
 use AbacatePay\Withdraw\WithdrawResource;
@@ -46,5 +47,10 @@ final readonly class AbacatePayClient
     public function withdraw(): WithdrawResource
     {
         return new WithdrawResource($this->client);
+    }
+
+    public function coupon(): CouponResource
+    {
+        return new CouponResource($this->client);
     }
 }
