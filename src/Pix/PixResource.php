@@ -6,6 +6,7 @@ namespace AbacatePay\Pix;
 
 use AbacatePay\Exception\AbacatePayException;
 use AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
+use AbacatePay\Pix\Http\Response\CheckStatusPixQrCodeResponse;
 use AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -39,6 +40,34 @@ final readonly class PixResource
             );
 
             return CreatePixQrCodeResponse::fromArray($responsePayload);
+        } catch (GuzzleException $e) {
+            match ($e->getCode()) {
+                Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
+                default => throw new AbacatePayException($e->getMessage(), $e->getCode()),
+            };
+        }
+    }
+     /**
+     * @throws AbacatePayException
+     * @throws JsonException
+     */
+    public function checkStatus(string $id): CheckStatusPixQrCodeResponse
+    {
+        try {
+            $response = $this->client->post(sprintf('%s/check', self::BASE_PATH), [
+                'query' => [
+                    'id' => $id
+                ],
+            ]);
+
+            $responsePayload = json_decode(
+                $response->getBody()->getContents(),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            );
+
+            return CheckStatusPixQrCodeResponse::fromArray($responsePayload);
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),

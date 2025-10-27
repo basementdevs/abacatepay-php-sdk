@@ -28,7 +28,7 @@ O SDK oferece suporte completo às principais operações da API AbacatePay:
 |**Cobranças**|Criar nova cobrança|✅|
 ||Listar cobranças|✅|
 |**Pix**|Criar QR Code Pix|✅|
-||Consultar status de pagamento do QR Code Pix|🧩 Em desenvolvimento|
+||Consultar status de pagamento do QR Code Pix|✅|
 |**Cupons**|Criar novo cupom|✅|
 ||Listar cupons|✅|
 |**Saques**|Criar novo saque|✅|
