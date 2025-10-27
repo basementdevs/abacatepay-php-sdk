@@ -16,7 +16,7 @@ final readonly class StoreResponse
     public static function fromArray(array $data): self
     {
         return new self(
-            data: StoreEntity::$data['data']
+            data: StoreEntity::fromArray($data['data'])
         );
     }
 

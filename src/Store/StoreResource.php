@@ -33,7 +33,7 @@ final readonly class StoreResource
                 JSON_THROW_ON_ERROR
             );
 
-            return StoreResponse::fromArray($responsePayload['data']);
+            return StoreResponse::fromArray($responsePayload);
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
