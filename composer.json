@@ -1,5 +1,5 @@
 {
-  "name": "basement/abacatepay-php-sdk",
+  "name": "basementdevs/abacatepay-php-sdk",
   "description": "AbacatePay PHP SDK Client",
   "version": "1.0.0",
   "type": "library",
