@@ -51,8 +51,9 @@ final readonly class WithdrawResource
 
     /**
      * @throws AbacatePayException
+     * @throws JsonException
      */
-    public function findWithDrawById(string $externalId): WithdrawResponse
+    public function findWithdrawById(string $externalId): WithdrawResponse
     {
         try {
             $response = $this->client->get(sprintf('%s/get/%s', self::BASE_PATH, $externalId));
@@ -77,7 +78,7 @@ final readonly class WithdrawResource
      * @throws AbacatePayException
      * @throws JsonException
      */
-    public function listWithDraw(): WithdrawEntityCollection
+    public function listWithdraw(): WithdrawEntityCollection
     {
         try {
             $response = $this->client->get(sprintf('%s/list', self::BASE_PATH));

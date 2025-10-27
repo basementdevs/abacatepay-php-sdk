@@ -166,7 +166,7 @@ it('should list all withdraw', function (): void {
     $client = new Client(['handler' => $handler]);
 
     $withDrawResource = new WithdrawResource(client: $client);
-    $response = $withDrawResource->listWithDraw();
+    $response = $withDrawResource->listWithdraw();
     $firstWithdraw = $response->all()[0];
     $secondWithdraw = $response->all()[1];
 
