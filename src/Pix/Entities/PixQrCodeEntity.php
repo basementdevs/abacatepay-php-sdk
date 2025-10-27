@@ -14,17 +14,16 @@ final readonly class PixQrCodeEntity implements JsonSerializable
      * @param  BillingMethodEnum[]  $methods
      */
     public function __construct(
-        public string $id,
-        public int $amount,
+        public string            $id,
+        public int               $amount,
         public BillingStatusEnum $status,
-        public bool $dev_mode,
-        public string $br_code,
-        public array $methods,
-        public string $br_code_base64,
-        public int $platform_fee,
-        public string $created_at,
-        public string $updated_at,
-        public string $expires_at,
+        public bool              $devMode,
+        public string            $brCode,
+        public string            $brCodeBase64,
+        public int               $platformFee,
+        public string            $createdAt,
+        public string            $updatedAt,
+        public string            $expiresAt,
     ) {
     }
 
@@ -34,17 +33,13 @@ final readonly class PixQrCodeEntity implements JsonSerializable
             id: $data['id'],
             amount: $data['amount'],
             status: BillingStatusEnum::from($data['status']),
-            dev_mode: $data['devMode'],
-            br_code: $data['brCode'],
-            methods: array_map(
-                BillingMethodEnum::from(...),
-                $data['methods'] ?? []
-            ),
-            br_code_base64: $data['brCodeBase64'],
-            platform_fee: $data['platformFee'],
-            created_at: $data['createdAt'],
-            updated_at: $data['updatedAt'],
-            expires_at: $data['expiresAt'],
+            devMode: $data['devMode'],
+            brCode: $data['brCode'],
+            brCodeBase64: $data['brCodeBase64'],
+            platformFee: $data['platformFee'],
+            createdAt: $data['createdAt'],
+            updatedAt: $data['updatedAt'],
+            expiresAt: $data['expiresAt'],
         );
     }
 
@@ -54,13 +49,13 @@ final readonly class PixQrCodeEntity implements JsonSerializable
             'id' => $this->id,
             'amount' => $this->amount,
             'status' => $this->status->value,
-            'dev_mode' => $this->dev_mode,
-            'br_code' => $this->br_code,
-            'br_code_base64' => $this->br_code_base64,
-            'platform_fee' => $this->platform_fee,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'expires_at' => $this->expires_at,
+            'dev_mode' => $this->devMode,
+            'br_code' => $this->brCode,
+            'br_code_base64' => $this->brCodeBase64,
+            'platform_fee' => $this->platformFee,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt,
+            'expires_at' => $this->expiresAt,
         ];
     }
 }

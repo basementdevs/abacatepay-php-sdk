@@ -17,6 +17,17 @@ final readonly class CreatePixQrCodeRequest implements JsonSerializable
     ) {
     }
 
+    public static function make(array $data): self
+    {
+        return new self(
+            amount: $data['amount'],
+            expiresIn: $data['expiresIn'],
+            description: $data['description'],
+            customer: $data['customer'],
+            metadata: $data['metadata'],
+        );
+    }
+
     public function jsonSerialize(): array
     {
         return [
