@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Http\Response;
+namespace Basement\AbacatePay\Billing\Http\Response;
 
-use AbacatePay\Billing\Entities\BillingEntity;
+use Basement\AbacatePay\Billing\Entities\BillingEntity;
 
 final readonly class CreateBillingResponse
 {

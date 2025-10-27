@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix\Entities;
+namespace Basement\AbacatePay\Pix\Entities;
 
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Enum\BillingStatusEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
 use JsonSerializable;
 
 final readonly class PixQrCodeEntity implements JsonSerializable

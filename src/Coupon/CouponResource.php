@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon;
+namespace Basement\AbacatePay\Coupon;
 
-use AbacatePay\Coupon\Entities\CouponCollection;
-use AbacatePay\Coupon\Http\Request\CreateCouponRequest;
-use AbacatePay\Coupon\Http\Response\CouponResponse;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Coupon\Entities\CouponCollection;
+use Basement\AbacatePay\Coupon\Http\Request\CreateCouponRequest;
+use Basement\AbacatePay\Coupon\Http\Response\CouponResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon\Http\Response;
+namespace Basement\AbacatePay\Coupon\Http\Response;
 
-use AbacatePay\Coupon\Entities\CouponEntity;
+use Basement\AbacatePay\Coupon\Entities\CouponEntity;
 
 final readonly class CouponResponse
 {

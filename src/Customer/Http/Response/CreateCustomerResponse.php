@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Customer\Http\Response;
+namespace Basement\AbacatePay\Customer\Http\Response;
 
-use AbacatePay\Customer\Entities\CustomerEntity;
+use Basement\AbacatePay\Customer\Entities\CustomerEntity;
 
 final readonly class CreateCustomerResponse
 {

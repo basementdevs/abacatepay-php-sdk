@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw\Entities;
+namespace Basement\AbacatePay\Withdraw\Entities;
 
-use AbacatePay\Withdraw\Enums\WithdrawKindEnum;
-use AbacatePay\Withdraw\Enums\WithdrawStatusEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawKindEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawStatusEnum;
 use JsonSerializable;
 
 final readonly class WithdrawEntity implements JsonSerializable

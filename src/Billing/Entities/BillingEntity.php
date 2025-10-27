@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Entities;
+namespace Basement\AbacatePay\Billing\Entities;
 
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Enum\BillingStatusEnum;
-use AbacatePay\Customer\Entities\CustomerEntity;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
+use Basement\AbacatePay\Customer\Entities\CustomerEntity;
 use JsonSerializable;
 
 final readonly class BillingEntity implements JsonSerializable

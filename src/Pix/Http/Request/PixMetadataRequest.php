@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix\Http\Request;
+namespace Basement\AbacatePay\Pix\Http\Request;
 
 final readonly class PixMetadataRequest
 {

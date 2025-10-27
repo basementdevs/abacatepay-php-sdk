@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay;
+namespace Basement\AbacatePay;
 
-use AbacatePay\Billing\BillingResource;
-use AbacatePay\Coupon\CouponResource;
-use AbacatePay\Customer\CustomerResource;
-use AbacatePay\Pix\PixResource;
-use AbacatePay\Store\StoreResource;
-use AbacatePay\Withdraw\WithdrawResource;
+use Basement\AbacatePay\Billing\BillingResource;
+use Basement\AbacatePay\Coupon\CouponResource;
+use Basement\AbacatePay\Customer\CustomerResource;
+use Basement\AbacatePay\Pix\PixResource;
+use Basement\AbacatePay\Store\StoreResource;
+use Basement\AbacatePay\Withdraw\WithdrawResource;
 use GuzzleHttp\Client;
 
 final readonly class AbacatePayClient

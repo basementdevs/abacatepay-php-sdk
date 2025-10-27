@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix\Enum;
+namespace Basement\AbacatePay\Pix\Enum;
 
 enum StatusQrCode: string
 {

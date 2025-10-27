@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Store\Http\Response\StoreResponse;
-use AbacatePay\Store\StoreResource;
+use Basement\AbacatePay\Store\Http\Response\StoreResponse;
+use Basement\AbacatePay\Store\StoreResource;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;

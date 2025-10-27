@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Customer\Http\Request;
+namespace Basement\AbacatePay\Customer\Http\Request;
 
 final readonly class CreateCustomerRequest
 {

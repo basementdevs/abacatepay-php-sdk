@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix\Entities;
+namespace Basement\AbacatePay\Pix\Entities;
 
-use AbacatePay\Pix\Enum\StatusQrCode;
+use Basement\AbacatePay\Pix\Enum\StatusQrCode;
 use JsonSerializable;
 
 class StatusPixQrCode implements JsonSerializable

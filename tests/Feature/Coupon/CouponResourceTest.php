@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Coupon\CouponResource;
-use AbacatePay\Coupon\Entities\CouponEntity;
-use AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
-use AbacatePay\Coupon\Enums\CouponStatusEnum;
-use AbacatePay\Coupon\Http\Request\CreateCouponRequest;
-use AbacatePay\Coupon\Http\Response\CouponResponse;
+use Basement\AbacatePay\Coupon\CouponResource;
+use Basement\AbacatePay\Coupon\Entities\CouponEntity;
+use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
+use Basement\AbacatePay\Coupon\Enums\CouponStatusEnum;
+use Basement\AbacatePay\Coupon\Http\Request\CreateCouponRequest;
+use Basement\AbacatePay\Coupon\Http\Response\CouponResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;

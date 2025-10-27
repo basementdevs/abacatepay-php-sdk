@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Customer\CustomerResource;
-use AbacatePay\Customer\Http\Request\CreateCustomerRequest;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Customer\CustomerResource;
+use Basement\AbacatePay\Customer\Http\Request\CreateCustomerRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;

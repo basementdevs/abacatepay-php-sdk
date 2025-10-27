@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
-use AbacatePay\Billing\Collection\BillingEntityCollection;
-use AbacatePay\Billing\Entities\BillingEntity;
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Collection\BillingEntityCollection;
+use Basement\AbacatePay\Billing\Entities\BillingEntity;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
 
 beforeEach(function () {
     $this->createBillingData = function (string $id, int $amount, string $status): array {

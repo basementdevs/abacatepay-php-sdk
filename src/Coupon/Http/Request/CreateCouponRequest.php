@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon\Http\Request;
+namespace Basement\AbacatePay\Coupon\Http\Request;
 
-use AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
+use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
 use JsonSerializable;
 
 final readonly class CreateCouponRequest implements JsonSerializable

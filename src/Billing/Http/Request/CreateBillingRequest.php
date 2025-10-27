@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Http\Request;
+namespace Basement\AbacatePay\Billing\Http\Request;
 
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Customer\Http\Request\CustomerRequest;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
 
 final readonly class CreateBillingRequest
 {

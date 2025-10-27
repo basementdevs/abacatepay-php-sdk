@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing;
+namespace Basement\AbacatePay\Billing;
 
-use AbacatePay\Billing\Http\Request\CreateBillingRequest;
-use AbacatePay\Billing\Http\Response\CreateBillingResponse;
-use AbacatePay\Billing\Http\Response\ListBillingResponse;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Billing\Http\Request\CreateBillingRequest;
+use Basement\AbacatePay\Billing\Http\Response\CreateBillingResponse;
+use Basement\AbacatePay\Billing\Http\Response\ListBillingResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;

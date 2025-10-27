@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Collection;
+namespace Basement\AbacatePay\Billing\Collection;
 
-use AbacatePay\Billing\Entities\BillingEntity;
 use ArrayIterator;
+use Basement\AbacatePay\Billing\Entities\BillingEntity;
 use Countable;
 use IteratorAggregate;
 

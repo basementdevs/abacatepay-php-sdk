@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw\Entities;
+namespace Basement\AbacatePay\Withdraw\Entities;
 
 use ArrayIterator;
 use Countable;

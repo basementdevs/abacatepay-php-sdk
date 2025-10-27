@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw\Http\Request;
+namespace Basement\AbacatePay\Withdraw\Http\Request;
 
-use AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
 use JsonSerializable;
 
 final readonly class CreateWithdrawRequest implements JsonSerializable

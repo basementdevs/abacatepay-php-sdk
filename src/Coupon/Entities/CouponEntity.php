@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon\Entities;
+namespace Basement\AbacatePay\Coupon\Entities;
 
-use AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
-use AbacatePay\Coupon\Enums\CouponStatusEnum;
+use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
+use Basement\AbacatePay\Coupon\Enums\CouponStatusEnum;
 use JsonSerializable;
 
 final readonly class CouponEntity implements JsonSerializable

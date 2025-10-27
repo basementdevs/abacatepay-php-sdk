@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\BillingResource;
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Enum\BillingStatusEnum;
-use AbacatePay\Billing\Http\Request\CreateBillingRequest;
-use AbacatePay\Billing\Http\Request\ProductRequest;
-use AbacatePay\Customer\Http\Request\CustomerRequest;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Billing\BillingResource;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
+use Basement\AbacatePay\Billing\Http\Request\CreateBillingRequest;
+use Basement\AbacatePay\Billing\Http\Request\ProductRequest;
+use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;

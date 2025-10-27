@@ -1,11 +1,11 @@
 {
-  "name": "abacatepay/php-sdk-v2",
-  "description": "AbacatePay client v2.",
+  "name": "basement/abacatepay-php-sdk",
+  "description": "AbacatePay PHP SDK Client",
   "version": "1.0.0",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "AbacatePay\\": "src/"
+      "Basement\\AbacatePay\\": "src/"
     }
   },
   "autoload-dev": {
@@ -14,7 +14,7 @@
     }
   },
   "require": {
-    "php": "^8.4",
+    "php": "^8.3",
     "guzzlehttp/guzzle": "^7.10.0",
     "symfony/http-foundation": "^v7.3.4"
   },

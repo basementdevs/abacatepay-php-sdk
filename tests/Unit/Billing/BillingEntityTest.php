@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\Entities\BillingEntity;
-use AbacatePay\Billing\Entities\BillingProductEntity;
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Enum\BillingStatusEnum;
-use AbacatePay\Customer\Entities\CustomerEntity;
+use Basement\AbacatePay\Billing\Entities\BillingEntity;
+use Basement\AbacatePay\Billing\Entities\BillingProductEntity;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
+use Basement\AbacatePay\Customer\Entities\CustomerEntity;
 
 it('creates billing entity from array', function () {
     $data = [

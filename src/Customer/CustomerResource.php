@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Customer;
+namespace Basement\AbacatePay\Customer;
 
-use AbacatePay\Customer\Entities\CustomerEntityCollection;
-use AbacatePay\Customer\Http\Request\CreateCustomerRequest;
-use AbacatePay\Customer\Http\Response\CreateCustomerResponse;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Customer\Entities\CustomerEntityCollection;
+use Basement\AbacatePay\Customer\Http\Request\CreateCustomerRequest;
+use Basement\AbacatePay\Customer\Http\Response\CreateCustomerResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;

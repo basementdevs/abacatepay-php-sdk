@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Withdraw\Enums\WithdrawKindEnum;
-use AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
-use AbacatePay\Withdraw\Enums\WithdrawPixTypeEnum;
-use AbacatePay\Withdraw\Enums\WithdrawStatusEnum;
-use AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
-use AbacatePay\Withdraw\Http\Request\WithdrawPixRequest;
-use AbacatePay\Withdraw\WithdrawResource;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawKindEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawPixTypeEnum;
+use Basement\AbacatePay\Withdraw\Enums\WithdrawStatusEnum;
+use Basement\AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
+use Basement\AbacatePay\Withdraw\Http\Request\WithdrawPixRequest;
+use Basement\AbacatePay\Withdraw\WithdrawResource;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;

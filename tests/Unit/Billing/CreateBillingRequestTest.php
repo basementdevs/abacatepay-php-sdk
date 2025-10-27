@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Http\Request\CreateBillingRequest;
-use AbacatePay\Billing\Http\Request\ProductRequest;
-use AbacatePay\Customer\Http\Request\CustomerRequest;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Http\Request\CreateBillingRequest;
+use Basement\AbacatePay\Billing\Http\Request\ProductRequest;
+use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
 
 it('creates request with all fields', function () {
     $products = [

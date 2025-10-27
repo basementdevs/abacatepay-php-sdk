@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\Enum\BillingStatusEnum;
-use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
-use AbacatePay\Pix\Http\Request\PixCustomerRequest;
-use AbacatePay\Pix\Http\Request\PixMetadataRequest;
-use AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
-use AbacatePay\Pix\PixResource;
+use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
+use Basement\AbacatePay\Pix\Http\Request\PixCustomerRequest;
+use Basement\AbacatePay\Pix\Http\Request\PixMetadataRequest;
+use Basement\AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
+use Basement\AbacatePay\Pix\PixResource;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;

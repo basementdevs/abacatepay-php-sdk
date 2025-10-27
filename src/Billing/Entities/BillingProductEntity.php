@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Entities;
+namespace Basement\AbacatePay\Billing\Entities;
 
 use JsonSerializable;
 

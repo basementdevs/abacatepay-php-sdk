@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw;
+namespace Basement\AbacatePay\Withdraw;
 
-use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Withdraw\Entities\WithdrawEntityCollection;
-use AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
-use AbacatePay\Withdraw\Http\Response\WithdrawResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Withdraw\Entities\WithdrawEntityCollection;
+use Basement\AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
+use Basement\AbacatePay\Withdraw\Http\Response\WithdrawResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;

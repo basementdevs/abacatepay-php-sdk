@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon\Entities;
+namespace Basement\AbacatePay\Coupon\Entities;
 
 use ArrayIterator;
 use Countable;

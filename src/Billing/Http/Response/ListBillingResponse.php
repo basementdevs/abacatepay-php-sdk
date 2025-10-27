@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Http\Response;
+namespace Basement\AbacatePay\Billing\Http\Response;
 
-use AbacatePay\Billing\Collection\BillingEntityCollection;
+use Basement\AbacatePay\Billing\Collection\BillingEntityCollection;
 
 final readonly class ListBillingResponse
 {

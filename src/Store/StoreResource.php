@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Store;
+namespace Basement\AbacatePay\Store;
 
-use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Store\Http\Response\StoreResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Store\Http\Response\StoreResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;

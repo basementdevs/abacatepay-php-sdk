@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Store\Entities;
+namespace Basement\AbacatePay\Store\Entities;
 
-use AbacatePay\Store\Http\Response\StoreBalanceResponse;
+use Basement\AbacatePay\Store\Http\Response\StoreBalanceResponse;
 
 final readonly class StoreEntity
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Coupon\Enums;
+namespace Basement\AbacatePay\Coupon\Enums;
 
 enum CouponDiscountKindEnum: string
 {

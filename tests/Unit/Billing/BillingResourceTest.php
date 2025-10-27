@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use AbacatePay\Billing\BillingResource;
-use AbacatePay\Billing\Collection\BillingEntityCollection;
-use AbacatePay\Billing\Entities\BillingEntity;
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Http\Request\CreateBillingRequest;
-use AbacatePay\Billing\Http\Request\ProductRequest;
-use AbacatePay\Billing\Http\Response\CreateBillingResponse;
-use AbacatePay\Billing\Http\Response\ListBillingResponse;
-use AbacatePay\Customer\Http\Request\CustomerRequest;
-use AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Billing\BillingResource;
+use Basement\AbacatePay\Billing\Collection\BillingEntityCollection;
+use Basement\AbacatePay\Billing\Entities\BillingEntity;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Http\Request\CreateBillingRequest;
+use Basement\AbacatePay\Billing\Http\Request\ProductRequest;
+use Basement\AbacatePay\Billing\Http\Response\CreateBillingResponse;
+use Basement\AbacatePay\Billing\Http\Response\ListBillingResponse;
+use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;

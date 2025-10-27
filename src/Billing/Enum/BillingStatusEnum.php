@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Billing\Enum;
+namespace Basement\AbacatePay\Billing\Enum;
 
 enum BillingStatusEnum: string
 {

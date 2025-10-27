@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Store\Http\Response;
+namespace Basement\AbacatePay\Store\Http\Response;
 
 final readonly class StoreBalanceResponse
 {

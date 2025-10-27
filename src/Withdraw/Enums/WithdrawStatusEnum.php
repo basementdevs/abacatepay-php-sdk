@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw\Enums;
+namespace Basement\AbacatePay\Withdraw\Enums;
 
 enum WithdrawStatusEnum: string
 {

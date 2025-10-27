@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix;
+namespace Basement\AbacatePay\Pix;
 
-use AbacatePay\Exception\AbacatePayException;
-use AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
-use AbacatePay\Pix\Http\Response\CheckStatusPixQrCodeResponse;
-use AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use Basement\AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
+use Basement\AbacatePay\Pix\Http\Response\CheckStatusPixQrCodeResponse;
+use Basement\AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,10 +47,10 @@ final readonly class PixResource
             };
         }
     }
-     /**
-     * @throws AbacatePayException
-     * @throws JsonException
-     */
+    /**
+    * @throws AbacatePayException
+    * @throws JsonException
+    */
     public function checkStatus(string $id): CheckStatusPixQrCodeResponse
     {
         try {

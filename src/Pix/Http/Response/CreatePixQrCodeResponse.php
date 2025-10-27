@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Pix\Http\Response;
+namespace Basement\AbacatePay\Pix\Http\Response;
 
-use AbacatePay\Pix\Entities\PixQrCodeEntity;
+use Basement\AbacatePay\Pix\Entities\PixQrCodeEntity;
 
 final readonly class CreatePixQrCodeResponse
 {

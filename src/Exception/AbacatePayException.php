@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Exception;
+namespace Basement\AbacatePay\Exception;
 
 use Exception;
 

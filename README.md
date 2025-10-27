@@ -42,8 +42,8 @@ O SDK oferece suporte completo às principais operações da API AbacatePay:
 ### Criar Cliente
 
 ```php
-use AbacatePay\AbacatePayClient;
-use AbacatePay\Customer\CreateCustomerRequest;
+use Basement\AbacatePay\AbacatePayClient;
+use Basement\AbacatePay\Customer\CreateCustomerRequest;
 
 $sdk = new AbacatePayClient('seu-token-aqui');
 
@@ -60,11 +60,11 @@ $response = $sdk->customers()->create($request);
 ### Criar Cobrança
 
 ```php
-use AbacatePay\AbacatePayClient;
-use AbacatePay\Billing\CreateBillingRequest;
-use AbacatePay\Billing\ProductRequest;
-use AbacatePay\Billing\Enum\BillingMethodEnum;
-use AbacatePay\Billing\Enum\BillingFrequencyEnum;
+use Basement\AbacatePay\AbacatePayClient;
+use Basement\AbacatePay\Billing\CreateBillingRequest;
+use Basement\AbacatePay\Billing\ProductRequest;
+use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
 
 $sdk = new AbacatePayClient('seu-token-aqui');
 
@@ -95,10 +95,10 @@ $response = $sdk->billings()->create($request);
 ### Criar QR Code Pix
 
 ```php
-use AbacatePay\AbacatePayClient;
-use AbacatePay\Pix\CreatePixQrCodeRequest;
-use AbacatePay\Pix\PixCustomerRequest;
-use AbacatePay\Pix\PixMetadataRequest;
+use Basement\AbacatePay\AbacatePayClient;
+use Basement\AbacatePay\Pix\CreatePixQrCodeRequest;
+use Basement\AbacatePay\Pix\PixCustomerRequest;
+use Basement\AbacatePay\Pix\PixMetadataRequest;
 
 $sdk = new AbacatePayClient('seu-token-aqui');
 
@@ -126,11 +126,11 @@ print_r($response);
 ### Criar Saque Pix
 
 ```php
-use AbacatePay\AbacatePayClient;
-use AbacatePay\Withdraw\CreateWithdrawRequest;
-use AbacatePay\Withdraw\WithdrawPixRequest;
-use AbacatePay\Withdraw\Enum\WithdrawMethodsEnum;
-use AbacatePay\Withdraw\Enum\WithdrawPixTypeEnum;
+use Basement\AbacatePay\AbacatePayClient;
+use Basement\AbacatePay\Withdraw\CreateWithdrawRequest;
+use Basement\AbacatePay\Withdraw\WithdrawPixRequest;
+use Basement\AbacatePay\Withdraw\Enum\WithdrawMethodsEnum;
+use Basement\AbacatePay\Withdraw\Enum\WithdrawPixTypeEnum;
 
 $sdk = new AbacatePayClient('seu-token-aqui');
 

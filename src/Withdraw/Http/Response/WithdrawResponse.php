@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AbacatePay\Withdraw\Http\Response;
+namespace Basement\AbacatePay\Withdraw\Http\Response;
 
-use AbacatePay\Withdraw\Entities\WithdrawEntity;
+use Basement\AbacatePay\Withdraw\Entities\WithdrawEntity;
 
 final readonly class WithdrawResponse
 {
