@@ -31,6 +31,11 @@ final readonly class CreateCouponRequest implements JsonSerializable
         );
     }
 
+    public static function builder(): CreateCouponRequestBuilder
+    {
+        return new CreateCouponRequestBuilder();
+    }
+
     public function jsonSerialize(): array
     {
         return [

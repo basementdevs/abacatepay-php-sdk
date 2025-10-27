@@ -8,7 +8,7 @@ use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
 use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
 use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
 
-final readonly class CreateBillingRequest
+final class CreateBillingRequest
 {
     /**
      * @param  BillingMethodEnum[]  $methods
@@ -21,12 +21,29 @@ final readonly class CreateBillingRequest
         public array $products,
         public string $return_url,
         public string $completion_url,
-        public ?string $customerId,
-        public ?CustomerRequest $customer,
         public bool $allow_coupons,
         public array $coupons,
+        public ?string $customerId,
+        public ?CustomerRequest $customer,
         public ?string $externalId
     ) {
+    }
+
+    public static function make(): CreateBillingRequestBuilder
+    {
+        return new CreateBillingRequestBuilder();
+    }
+
+    public static function oneTime(): CreateBillingRequestBuilder
+    {
+        return (new CreateBillingRequestBuilder())
+            ->frequency(BillingFrequencyEnum::OneTime);
+    }
+
+    public static function multipleTimes(): CreateBillingRequestBuilder
+    {
+        return (new CreateBillingRequestBuilder())
+            ->frequency(BillingFrequencyEnum::MultiplePayments);
     }
 
     public function toArray(): array

@@ -31,6 +31,7 @@ O SDK oferece suporte completo às principais operações da API AbacatePay:
 ||Consultar status de pagamento do QR Code Pix|✅|
 |**Cupons**|Criar novo cupom|✅|
 ||Listar cupons|✅|
+||Criar cupom via builder|✅|
 |**Saques**|Criar novo saque|✅|
 ||Buscar saque por ID externo|✅|
 ||Listar saques|✅|
@@ -89,7 +90,18 @@ $request = new CreateBillingRequest(
     externalId: 'BILL-001',
 );
 
-$response = $sdk->billings()->create($request);
+// OR
+
+$request = CreateBillingRequest::multipleTimes()
+    ->creditCard()
+    ->completionUrl('https://fodase.com')
+    ->returnUrl('https://google.com')
+    ->forCustomerId('cust_abc123412312312')
+    ->externalId('some-amazing-key')
+    ->addProduct(new ProductRequest('some-amazing-product', 't-shirt', 'def a tshirt', 1, 1337_00))
+    ->build()
+
+$response = $sdk->billing()->create($request);
 ```
 
 ### Criar QR Code Pix

@@ -9,6 +9,8 @@ enum BillingStatusEnum: string
     case Pending = 'PENDING';
     case Expired = 'EXPIRED';
     case Cancelled = 'CANCELLED';
+
+    case Active = 'ACTIVE';
     case Paid = 'PAID';
     case Refunded = 'REFUNDED';
 }
