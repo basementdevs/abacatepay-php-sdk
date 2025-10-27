@@ -8,6 +8,7 @@ use AbacatePay\Billing\BillingResource;
 use AbacatePay\Coupon\CouponResource;
 use AbacatePay\Customer\CustomerResource;
 use AbacatePay\Pix\PixResource;
+use AbacatePay\Store\StoreResource;
 use AbacatePay\Withdraw\WithdrawResource;
 use GuzzleHttp\Client;
 
@@ -52,5 +53,10 @@ final readonly class AbacatePayClient
     public function coupon(): CouponResource
     {
         return new CouponResource($this->client);
+    }
+
+    public function store(): StoreResource
+    {
+        return new StoreResource($this->client);
     }
 }
