@@ -3,6 +3,12 @@
   "description": "AbacatePay PHP SDK Client",
   "version": "1.0.0",
   "type": "library",
+  "keywords": [
+    "abacatepay",
+    "payment",
+    "sdk",
+    "php"
+  ],
   "autoload": {
     "psr-4": {
       "Basement\\AbacatePay\\": "src/"
@@ -28,5 +34,7 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
