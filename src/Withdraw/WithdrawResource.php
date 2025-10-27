@@ -44,7 +44,7 @@ final readonly class WithdrawResource
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
-                default => throw new AbacatePayException('Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR),
+                default => throw new AbacatePayException($e->getMessage(), $e->getCode()),
             };
         }
     }
@@ -69,7 +69,7 @@ final readonly class WithdrawResource
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
-                default => throw new AbacatePayException('Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR),
+                default => throw new AbacatePayException($e->getMessage(), $e->getCode()),
             };
         }
     }
@@ -94,7 +94,7 @@ final readonly class WithdrawResource
         } catch (GuzzleException $e) {
             match ($e->getCode()) {
                 Response::HTTP_UNAUTHORIZED => throw AbacatePayException::unauthorized(),
-                default => throw new AbacatePayException('Internal Server Error', Response::HTTP_INTERNAL_SERVER_ERROR),
+                default => throw new AbacatePayException($e->getMessage(), $e->getCode()),
             };
         }
     }
