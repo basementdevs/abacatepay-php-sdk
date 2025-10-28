@@ -1,15 +1,18 @@
 # AbacatePay PHP SDK
 
 SDK para integração com a **API AbacatePay**.
-Permite gerenciar clientes, cobranças e transações de forma simples usando PHP.
+Permite gerenciar clientes, cobranças, QR Codes Pix e saques de forma simples e fluente usando PHP moderno.
 
 ---
+
 ## Requisitos
 
-- PHP 8.3 ou maior
-- Composer
-- Conta na AbacatePay
-- API Token
+* PHP 8.3 ou maior
+* Composer
+* Conta na AbacatePay
+* API Token válido
+
+---
 
 ## Instalação
 
@@ -17,169 +20,210 @@ Permite gerenciar clientes, cobranças e transações de forma simples usando PH
 composer require basementdevs/abacatepay-php-sdk
 ```
 
+---
+
 ## Features
 
-O SDK oferece suporte completo às principais operações da API AbacatePay:
+| Categoria     | Funcionalidade                               | Status |
+| ------------- | -------------------------------------------- | ------ |
+| **Clientes**  | Criar novo cliente                           | ✅      |
+|               | Listar clientes                              | ✅      |
+| **Cobranças** | Criar nova cobrança                          | ✅      |
+|               | Listar cobranças                             | ✅      |
+| **Pix**       | Criar QR Code Pix                            | ✅      |
+|               | Consultar status de pagamento do QR Code Pix | ✅      |
+| **Cupons**    | Criar novo cupom                             | ✅      |
+|               | Listar cupons                                | ✅      |
+| **Saques**    | Criar novo saque                             | ✅      |
+|               | Buscar saque por ID externo                  | ✅      |
+|               | Listar saques                                | ✅      |
 
-|Categoria|Funcionalidade|Status|
-|---|---|---|
-|**Clientes**|Criar novo cliente|✅|
-||Listar clientes|✅|
-|**Cobranças**|Criar nova cobrança|✅|
-||Listar cobranças|✅|
-|**Pix**|Criar QR Code Pix|✅|
-||Consultar status de pagamento do QR Code Pix|✅|
-|**Cupons**|Criar novo cupom|✅|
-||Listar cupons|✅|
-||Criar cupom via builder|✅|
-|**Saques**|Criar novo saque|✅|
-||Buscar saque por ID externo|✅|
-||Listar saques|✅|
+---
+
+## Builders
+
+O SDK utiliza o **padrão Builder** para tornar a criação de requisições mais fluente, segura e legível.
+Em vez de instanciar objetos manualmente com longas listas de parâmetros, o *builder* permite construir o objeto passo a passo e valida automaticamente campos obrigatórios antes do envio.
+
+### Motivação
+
+* **Legibilidade:** o código descreve claramente o que está sendo criado.
+* **Segurança:** evita instâncias inválidas de requisições (campos obrigatórios ausentes).
+* **Consistência:** todos os tipos de requisição seguem a mesma interface fluente (`::builder()` + `->build()`).
+* **Extensibilidade:** fácil adicionar novos campos ou validações sem quebrar código existente.
+
+### Exemplo comparativo
+
+Sem builder:
+
+```php
+$request = new CreatePixQrCodeRequest(
+    10000, 3600, 'Pagamento de assinatura',
+    new PixCustomerRequest('Maria', '+55...', 'maria@email.com', '123'),
+    new PixMetadataRequest('order-abc-123')
+);
+```
+
+Com builder:
+
+```php
+$pixQr = CreatePixQrCodeRequest::builder()
+    ->amount(10000)
+    ->expiresIn(3600)
+    ->description('Pagamento de assinatura')
+    ->customer(
+        PixCustomerRequest::builder()
+            ->name('Maria Oliveira')
+            ->cellphone('+5511988887777')
+            ->email('maria@email.com')
+            ->taxId('12345678900')
+            ->build()
+    )
+    ->metadata(
+        PixMetadataRequest::builder()
+            ->externalId('order-abc-123')
+            ->build()
+    )
+    ->build();
+```
 
 ---
 
 ## Exemplos de Uso
 
+### Criar Produto e Cobrança
+
+```php
+$client = new AbacatePayClient('test_key');
+
+$product = ProductRequest::builder()
+    ->externalId('prod-123')
+    ->name('Garrafa Térmica 500ml')
+    ->description('Mantém bebidas quentes ou frias por até 8h')
+    ->quantity(2)
+    ->price(8900)
+    ->build();
+
+$response = $client->billing()
+    ->create(
+        CreateBillingRequest::multipleTimes()
+            ->creditCard()
+            ->completionUrl('https://exemplo.com/sucesso')
+            ->returnUrl('https://exemplo.com/retorno')
+            ->forCustomerId('cust_abc123')
+            ->externalId('billing-001')
+            ->addProduct($product)
+            ->build()
+    );
+```
+
+---
+
 ### Criar Cliente
 
 ```php
-use Basement\AbacatePay\AbacatePayClient;
-use Basement\AbacatePay\Customer\CreateCustomerRequest;
+$createCustomer = CreateCustomerRequest::builder()
+    ->name('João Silva')
+    ->cellphone('+5511999999999')
+    ->email('joao@email.com')
+    ->taxId('12345678900')
+    ->build();
 
-$sdk = new AbacatePayClient('seu-token-aqui');
-
-$request = new CreateCustomerRequest(
-    name: 'Maria Silva',
-    cellphone: '5599999999999',
-    email: 'maria@teste.com',
-    taxId: '12345678900',
-);
-
-$response = $sdk->customers()->create($request);
+$response = $client->customers()->create($createCustomer);
 ```
 
-### Criar Cobrança
-
-```php
-use Basement\AbacatePay\AbacatePayClient;
-use Basement\AbacatePay\Billing\CreateBillingRequest;
-use Basement\AbacatePay\Billing\ProductRequest;
-use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
-use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
-
-$sdk = new AbacatePayClient('seu-token-aqui');
-
-$product = new ProductRequest(
-    externalId: 'PROD-01',
-    name: 'Curso PHP',
-    description: 'Curso completo de PHP moderno',
-    quantity: 1,
-    price: 15000,
-);
-
-$request = new CreateBillingRequest(
-    frequency: BillingFrequencyEnum::OneTime,
-    methods: [BillingMethodEnum::Pix],
-    products: [$product],
-    return_url: 'https://seusite.com/sucesso',
-    completion_url: 'https://seusite.com/finalizado',
-    customerId: 'cust_abcdefghij',
-    customer: null,
-    allow_coupons: true,
-    coupons: [],
-    externalId: 'BILL-001',
-);
-
-// OR
-
-$request = CreateBillingRequest::multipleTimes()
-    ->creditCard()
-    ->completionUrl('https://fodase.com')
-    ->returnUrl('https://google.com')
-    ->forCustomerId('cust_abc123412312312')
-    ->externalId('some-amazing-key')
-    ->addProduct(new ProductRequest('some-amazing-product', 't-shirt', 'def a tshirt', 1, 1337_00))
-    ->build()
-
-$response = $sdk->billing()->create($request);
-```
+---
 
 ### Criar QR Code Pix
 
 ```php
-use Basement\AbacatePay\AbacatePayClient;
-use Basement\AbacatePay\Pix\CreatePixQrCodeRequest;
-use Basement\AbacatePay\Pix\PixCustomerRequest;
-use Basement\AbacatePay\Pix\PixMetadataRequest;
+$pixCustomer = PixCustomerRequest::builder()
+    ->name('Maria Oliveira')
+    ->cellphone('+5511988887777')
+    ->email('maria@email.com')
+    ->taxId('12345678900')
+    ->build();
 
-$sdk = new AbacatePayClient('seu-token-aqui');
+$metadata = PixMetadataRequest::builder()
+    ->externalId('order-abc-123')
+    ->build();
 
-$customer = new PixCustomerRequest(
-    name: 'João Souza',
-    cellphone: '5598888888888',
-    email: 'joao@teste.com',
-    taxId: '98765432100'
-);
+$pixQr = CreatePixQrCodeRequest::builder()
+    ->amount(10000)
+    ->expiresIn(3600)
+    ->description('Pagamento de assinatura')
+    ->customer($pixCustomer)
+    ->metadata($metadata)
+    ->build();
 
-$metadata = new PixMetadataRequest('ORDER-123');
-
-$request = new CreatePixQrCodeRequest(
-    amount: 2500,
-    expiresIn: 600,
-    description: 'Pagamento de pedido #123',
-    customer: $customer,
-    metadata: $metadata
-);
-
-$response = $sdk->pix()->createQrCode($request);
-print_r($response);
+$response = $client->pix()->createQrCode($pixQr);
 ```
+
+---
 
 ### Criar Saque Pix
 
 ```php
-use Basement\AbacatePay\AbacatePayClient;
-use Basement\AbacatePay\Withdraw\CreateWithdrawRequest;
-use Basement\AbacatePay\Withdraw\WithdrawPixRequest;
-use Basement\AbacatePay\Withdraw\Enum\WithdrawMethodsEnum;
-use Basement\AbacatePay\Withdraw\Enum\WithdrawPixTypeEnum;
+$pix = WithdrawPixRequest::builder()
+    ->type(WithdrawPixTypeEnum::Email)
+    ->key('user@email.com')
+    ->build();
 
-$sdk = new AbacatePayClient('seu-token-aqui');
+$request = CreateWithdrawRequest::builder()
+    ->externalId('withdraw-001')
+    ->method(WithdrawMethodsEnum::Pix)
+    ->amount(15000)
+    ->pix($pix)
+    ->description('Saque de teste')
+    ->build();
 
-$pix = new WithdrawPixRequest(
-    type: WithdrawPixTypeEnum::Random,
-    key: 'random-key-aqui'
-);
-
-$request = new CreateWithdrawRequest(
-    externalId: 'WITHDRAW-001',
-    method: WithdrawMethodsEnum::Pix,
-    amount: 10000,
-    pix: $pix,
-    description: 'Saque de teste'
-);
-
-$response = $sdk->withdraw()->create($request);
-print_r($response);
+$response = $client->withdraw()->create($request);
 ```
+
+---
+
+## Por que usar Builders?
+
+| Benefício             | Descrição                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| **API fluente**       | A construção é expressiva e de fácil leitura.                                       |
+| **Validação interna** | Todos os campos obrigatórios são verificados antes da criação.                      |
+| **Extensão segura**   | Novos campos podem ser adicionados sem alterar código existente.                    |
+| **Coerência**         | Todos os recursos (`Billing`, `Pix`, `Withdraw`, `Customer`) seguem o mesmo padrão. |
+
+### **Lista de Builders Disponíveis**
+
+| Builder                                                                     | Classe gerada            | Descrição                                                            |
+| --------------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------- |
+| `ProductRequest::builder()`                                                 | `ProductRequest`         | Cria produtos utilizados em cobranças.                               |
+| `CreateBillingRequest::multipleTimes()` / `CreateBillingRequest::oneTime()` | `CreateBillingRequest`   | Cria cobranças únicas ou recorrentes.                                |
+| `CreateCustomerRequest::builder()`                                          | `CreateCustomerRequest`  | Cria novos clientes.                                                 |
+| `CustomerRequest::builder()`                                                | `CustomerRequest`        | Representa clientes existentes em cobranças.                         |
+| `PixCustomerRequest::builder()`                                             | `PixCustomerRequest`     | Define dados do cliente para pagamentos via Pix.                     |
+| `PixMetadataRequest::builder()`                                             | `PixMetadataRequest`     | Define informações adicionais (como `externalId`) para QR Codes Pix. |
+| `CreatePixQrCodeRequest::builder()`                                         | `CreatePixQrCodeRequest` | Cria requisições para gerar QR Codes Pix.                            |
+| `WithdrawPixRequest::builder()`                                             | `WithdrawPixRequest`     | Define dados da chave Pix para saques.                               |
+| `CreateWithdrawRequest::builder()`                                          | `CreateWithdrawRequest`  | Cria requisições para saques via Pix.                                |
+
+---
 
 ## Comandos de Desenvolvimento
 
-| Comando       | Descrição                                                         |
-| ------------- | ----------------------------------------------------------------- |
-| `make all`    | Executa todos os passos de qualidade e teste: Pint, Rector e Pest |
-| `make rector` | Analisa o código com Rector e sugere refatorações                 |
-| `make pint`   | Formata o código automaticamente usando Pint                      |
-| `make test`   | Executa os testes automatizados com Pest                          |
-| `make fix`    | Aplica correções automáticas no código com Pint e Rector          |
+| Comando       | Descrição                         |
+| ------------- | --------------------------------- |
+| `make all`    | Executa Pint, Rector e Pest.      |
+| `make rector` | Analisa e sugere refatorações.    |
+| `make pint`   | Formata automaticamente o código. |
+| `make test`   | Executa testes automatizados.     |
+| `make fix`    | Corrige código com Pint e Rector. |
 
 ---
 
 ## Exceções
 
-| Código | Exceção                               | Descrição                 |
-| ------ | ------------------------------------- | ------------------------- |
-| 401    | `AbacatePayException::unauthorized()` | Token de autenticação inválido ou ausente. |
+| Código | Exceção                               | Descrição                  |
+| ------ | ------------------------------------- | -------------------------- |
+| 401    | `AbacatePayException::unauthorized()` | Token inválido ou ausente. |
 
 ---
 
@@ -187,18 +231,18 @@ print_r($response);
 
 1. Faça fork do repositório
 2. Crie um branch: `git checkout -b feature/nova-funcionalidade`
-3. Rode os testes com **Pest**:
+3. Rode os testes com Pest:
 
 ```bash
-  make test
+make test
 ```
-4. Envie um Pull Request
+
+4. Envie um Pull Request.
 
 ---
 
 ## Suporte
 
-- Para problemas com o SDK, abra uma issue no repositório.
-- Para dúvidas sobre a API, envie e-mail para **[ajuda@abacatepay.com](mailto:ajuda@abacatepay.com)**.
-- Para casos urgentes, entre em contato com o **time de suporte AbacatePay**.
-
+* Abra uma **issue** no repositório para dúvidas ou bugs
+* Suporte técnico: **[ajuda@abacatepay.com](mailto:ajuda@abacatepay.com)**
+* Casos urgentes: entre em contato com o **time AbacatePay**

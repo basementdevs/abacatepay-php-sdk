@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Billing\Http\Request;
 
+use Basement\AbacatePay\Billing\Http\Builder\ProductRequestBuilder;
+
 final readonly class ProductRequest
 {
     public function __construct(
@@ -13,6 +15,11 @@ final readonly class ProductRequest
         public int $quantity,
         public int $price,
     ) {}
+
+    public static function builder(): ProductRequestBuilder
+    {
+        return new ProductRequestBuilder;
+    }
 
     public function toArray(): array
     {

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Basement\AbacatePay\Coupon\Http\Request;
+namespace Basement\AbacatePay\Coupon\Http\Builder;
 
 use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
+use Basement\AbacatePay\Coupon\Http\Request\CreateCouponRequest;
 use InvalidArgumentException;
 
 final class CreateCouponRequestBuilder
@@ -20,11 +21,6 @@ final class CreateCouponRequestBuilder
     private ?int $discount = null;
 
     private ?array $metadata = null;
-
-    public static function make(): self
-    {
-        return new self;
-    }
 
     public function code(string $code): self
     {

@@ -6,6 +6,7 @@ namespace Basement\AbacatePay\Billing\Http\Request;
 
 use Basement\AbacatePay\Billing\Enum\BillingFrequencyEnum;
 use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
+use Basement\AbacatePay\Billing\Http\Builder\CreateBillingRequestBuilder;
 use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
 
 final class CreateBillingRequest
@@ -28,7 +29,7 @@ final class CreateBillingRequest
         public ?string $externalId
     ) {}
 
-    public static function make(): CreateBillingRequestBuilder
+    public static function builder(): CreateBillingRequestBuilder
     {
         return new CreateBillingRequestBuilder;
     }
