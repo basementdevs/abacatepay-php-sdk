@@ -47,6 +47,7 @@ final readonly class PixResource
             };
         }
     }
+
     /**
     * @throws AbacatePayException
     * @throws JsonException

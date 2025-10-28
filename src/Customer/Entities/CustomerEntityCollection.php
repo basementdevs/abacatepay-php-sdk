@@ -23,6 +23,17 @@ class CustomerEntityCollection implements Countable, IteratorAggregate
         }
     }
 
+    public static function fromArray(array $data): self
+    {
+        $collection = new self();
+
+        foreach ($data as $item) {
+            $collection->add(CustomerEntity::fromArray($item));
+        }
+
+        return $collection;
+    }
+
     public function add(CustomerEntity $customer): void
     {
         $this->items[] = $customer;
@@ -42,16 +53,5 @@ class CustomerEntityCollection implements Countable, IteratorAggregate
     public function all(): array
     {
         return $this->items;
-    }
-
-    public static function fromArray(array $data): self
-    {
-        $collection = new self();
-
-        foreach ($data as $item) {
-            $collection->add(CustomerEntity::fromArray($item));
-        }
-
-        return $collection;
     }
 }

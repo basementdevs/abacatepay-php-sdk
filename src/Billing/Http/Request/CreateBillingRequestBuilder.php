@@ -148,27 +148,31 @@ final class CreateBillingRequestBuilder
     public function build(): CreateBillingRequest
     {
         $errors = [];
-        if ($this->frequency === null) {
+        if (!$this->frequency instanceof BillingFrequencyEnum) {
             $errors[] = 'frequency';
         }
-        if (count($this->methods) === 0) {
+
+        if ($this->methods === []) {
             $errors[] = 'methods (at least one)';
         }
-        if (count($this->products) === 0) {
+
+        if ($this->products === []) {
             $errors[] = 'products (at least one)';
         }
+
         if ($this->returnUrl === null) {
             $errors[] = 'returnUrl';
         }
+
         if ($this->completionUrl === null) {
             $errors[] = 'completionUrl';
         }
 
-        if ($this->customerId !== null && $this->customer !== null) {
+        if ($this->customerId !== null && $this->customer instanceof CustomerRequest) {
             throw new InvalidArgumentException('Only one of customerId or customer may be provided.');
         }
 
-        if (! empty($errors)) {
+        if ($errors !== []) {
             throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
         }
 

@@ -24,6 +24,17 @@ final class BillingEntityCollection implements Countable, IteratorAggregate
         }
     }
 
+    public static function fromArray(array $data): self
+    {
+        $collection = new self();
+
+        foreach ($data as $item) {
+            $collection->add(BillingEntity::fromArray($item));
+        }
+
+        return $collection;
+    }
+
     public function add(BillingEntity $billing): void
     {
         $this->items[] = $billing;
@@ -43,16 +54,5 @@ final class BillingEntityCollection implements Countable, IteratorAggregate
     public function all(): array
     {
         return $this->items;
-    }
-
-    public static function fromArray(array $data): self
-    {
-        $collection = new self();
-
-        foreach ($data as $item) {
-            $collection->add(BillingEntity::fromArray($item));
-        }
-
-        return $collection;
     }
 }

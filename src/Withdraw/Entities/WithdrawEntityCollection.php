@@ -25,9 +25,15 @@ class WithdrawEntityCollection implements Countable, IteratorAggregate
         }
     }
 
-    private function add(WithDrawEntity $entity): void
+    public static function fromArray(array $data): self
     {
-        $this->items[] = $entity;
+        $collection = new self();
+
+        foreach ($data['data'] as $item) {
+            $collection->add(WithdrawEntity::fromArray($item));
+        }
+
+        return $collection;
     }
 
     public function count(): int
@@ -48,14 +54,8 @@ class WithdrawEntityCollection implements Countable, IteratorAggregate
         return $this->items;
     }
 
-    public static function fromArray(array $data): self
+    private function add(WithDrawEntity $entity): void
     {
-        $collection = new self();
-
-        foreach ($data['data'] as $item) {
-            $collection->add(WithdrawEntity::fromArray($item));
-        }
-
-        return $collection;
+        $this->items[] = $entity;
     }
 }

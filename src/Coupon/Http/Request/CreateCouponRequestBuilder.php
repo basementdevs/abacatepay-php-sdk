@@ -90,20 +90,24 @@ final class CreateCouponRequestBuilder
         if ($this->code === null) {
             $missing[] = 'code';
         }
+
         if ($this->notes === null) {
             $missing[] = 'notes';
         }
+
         if ($this->maxRedeems === null) {
             $missing[] = 'maxRedeems';
         }
-        if ($this->discountKind === null) {
+
+        if (!$this->discountKind instanceof CouponDiscountKindEnum) {
             $missing[] = 'discountKind';
         }
+
         if ($this->discount === null) {
             $missing[] = 'discount';
         }
 
-        if (! empty($missing)) {
+        if ($missing !== []) {
             throw new InvalidArgumentException('Missing required fields: '.implode(', ', $missing));
         }
 

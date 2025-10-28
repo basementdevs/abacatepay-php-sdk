@@ -22,6 +22,17 @@ final class CouponCollection implements Countable, IteratorAggregate
         }
     }
 
+    public static function fromArray(array $data): self
+    {
+        $collection = new self();
+
+        foreach ($data['data'] as $coupon) {
+            $collection->add(CouponEntity::fromArray($coupon));
+        }
+
+        return $collection;
+    }
+
     public function add(CouponEntity $coupon): void
     {
         $this->coupons[] = $coupon;
@@ -43,16 +54,5 @@ final class CouponCollection implements Countable, IteratorAggregate
     public function count(): int
     {
         return count($this->coupons);
-    }
-
-    public static function fromArray(array $data): self
-    {
-        $collection = new self();
-
-        foreach ($data['data'] as $coupon) {
-            $collection->add(CouponEntity::fromArray($coupon));
-        }
-
-        return $collection;
     }
 }
