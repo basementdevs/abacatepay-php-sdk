@@ -1,40 +1,60 @@
 {
-  "name": "basementdevs/abacatepay-php-sdk",
-  "description": "AbacatePay PHP SDK Client",
-  "version": "1.0.2",
-  "type": "library",
-  "keywords": [
-    "abacatepay",
-    "payment",
-    "sdk",
-    "php"
-  ],
-  "autoload": {
-    "psr-4": {
-      "Basement\\AbacatePay\\": "src/"
+    "name": "basementdevs/abacatepay-php-sdk",
+    "description": "AbacatePay PHP SDK Client",
+    "version": "1.0.2",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "abacatepay",
+        "payment",
+        "sdk",
+        "php"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Basement\\AbacatePay\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.10.0",
+        "symfony/http-foundation": "^v7.3.4"
+    },
+    "require-dev": {
+        "laravel/pint": "^v1.25.1",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^4.1",
+        "pestphp/pest-plugin-type-coverage": "^4.0",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.2"
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "lint": "pint",
+        "refactor": "rector",
+        "test:type-coverage": "pest --type-coverage",
+        "test:lint": "pint --test",
+        "test:unit": "pest --coverage",
+        "test:types": "phpstan",
+        "test:refactor": "rector --dry-run",
+        "test": [
+            "@test:refactor",
+            "@test:lint",
+            "@test:type-coverage",
+            "@test:unit"
+        ]
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
-  },
-  "require": {
-    "php": "^8.3",
-    "guzzlehttp/guzzle": "^7.10.0",
-    "symfony/http-foundation": "^v7.3.4"
-  },
-  "require-dev": {
-    "pestphp/pest": "^4.1",
-    "laravel/pint": "^v1.25.1",
-    "rector/rector": "^2.2",
-    "mockery/mockery": "^1.6"
-  },
-  "config": {
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
 }

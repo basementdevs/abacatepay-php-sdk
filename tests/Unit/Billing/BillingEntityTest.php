@@ -26,11 +26,11 @@ it('creates billing entity from array', function () {
                 'name' => 'Daniel Lima',
                 'cellphone' => '(11) 4002-8922',
                 'email' => 'daniel_lima@abacatepay.com',
-                'taxId' => '123.456.789-01'
-            ]
+                'taxId' => '123.456.789-01',
+            ],
         ],
         'allowCoupons' => false,
-        'coupons' => []
+        'coupons' => [],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -61,7 +61,7 @@ it('handles null next billing', function () {
         'nextBilling' => 'null',
         'customer' => null,
         'allowCoupons' => true,
-        'coupons' => []
+        'coupons' => [],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -81,7 +81,7 @@ it('sets actual next billing date', function () {
         'nextBilling' => '2025-11-23',
         'customer' => null,
         'allowCoupons' => false,
-        'coupons' => []
+        'coupons' => [],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -102,7 +102,7 @@ it('handles multiple methods and coupons', function () {
         'nextBilling' => 'null',
         'customer' => null,
         'allowCoupons' => true,
-        'coupons' => ['PROMO10', 'PROMO20']
+        'coupons' => ['PROMO10', 'PROMO20'],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -128,11 +128,11 @@ it('json serialization works', function () {
             'id' => 'cust_001',
             'metadata' => [
                 'name' => 'Test User', 'email' => 'test@example.com', 'cellphone' => '(11) 4002-8922',
-                'taxId' => '123.456.789-01'
-            ]
+                'taxId' => '123.456.789-01',
+            ],
         ],
         'allowCoupons' => true,
-        'coupons' => ['DISCOUNT']
+        'coupons' => ['DISCOUNT'],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -163,7 +163,7 @@ it('handles entity without customer', function () {
         'nextBilling' => 'null',
         'customer' => null,
         'allowCoupons' => false,
-        'coupons' => []
+        'coupons' => [],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -186,7 +186,7 @@ it('handles empty arrays', function () {
         'nextBilling' => 'null',
         'customer' => null,
         'allowCoupons' => false,
-        'coupons' => []
+        'coupons' => [],
     ];
 
     $entity = BillingEntity::fromArray($data);
@@ -213,7 +213,7 @@ it('handles all statuses', function () {
             'nextBilling' => 'null',
             'customer' => null,
             'allowCoupons' => false,
-            'coupons' => []
+            'coupons' => [],
         ];
 
         $entity = BillingEntity::fromArray($data);
@@ -237,7 +237,7 @@ it('handles all frequencies', function () {
             'nextBilling' => $frequency !== 'ONE_TIME' ? '2025-11-23' : 'null',
             'customer' => null,
             'allowCoupons' => false,
-            'coupons' => []
+            'coupons' => [],
         ];
 
         $entity = BillingEntity::fromArray($data);

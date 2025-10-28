@@ -8,18 +8,20 @@ use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Store\Http\Response\StoreResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
 final readonly class StoreResource
 {
     public const string BASE_PATH = 'store';
+
     public function __construct(
         private Client $client,
     ) {}
 
     /**
      * @throws AbacatePayException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function getStore(): StoreResponse
     {

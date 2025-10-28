@@ -18,5 +18,4 @@ final readonly class StoreResponse
             data: StoreEntity::fromArray($data['data'])
         );
     }
-
 }

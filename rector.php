@@ -2,21 +2,37 @@
 
 declare(strict_types=1);
 
+use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
+use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
+use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\TypeDeclaration\Rector\ArrowFunction\AddArrowFunctionReturnTypeRector;
 
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/src',
     ])
-    ->withSkip([
-        __DIR__.'/vendor',
-        __DIR__.'/.rector.cache',
+    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withRootFiles()
+    ->withPHPStanConfigs([
+        __DIR__.'/phpstan.neon',
     ])
-    ->withSets([
-        LevelSetList::UP_TO_PHP_82,
-        SetList::CODE_QUALITY,
-        SetList::TYPE_DECLARATION,
-        SetList::EARLY_RETURN,
+    ->withPhpSets()
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        instanceOf: true,
+        earlyReturn: true,
+        rectorPreset: true,
+    )
+    ->withSkip([
+        AddOverrideAttributeToOverriddenMethodsRector::class,
+        ChangeOrIfContinueToMultiContinueRector::class,
+        PostIncDecToPreIncDecRector::class,
+        AddArrowFunctionReturnTypeRector::class,
+        CatchExceptionNameMatchingTypeRector::class,
     ]);

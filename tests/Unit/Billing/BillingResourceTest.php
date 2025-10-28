@@ -37,7 +37,7 @@ it('creates a billing successfully', function () {
             'devMode' => true,
             'methods' => ['PIX'],
             'products' => [
-                ['id' => 'prod_123456', 'externalId' => 'prod-1234', 'quantity' => 2]
+                ['id' => 'prod_123456', 'externalId' => 'prod-1234', 'quantity' => 2],
             ],
             'frequency' => 'ONE_TIME',
             'nextBilling' => null,
@@ -47,12 +47,12 @@ it('creates a billing successfully', function () {
                     'name' => 'Daniel Lima',
                     'cellphone' => '(11) 4002-8922',
                     'email' => 'daniel_lima@abacatepay.com',
-                    'taxId' => '123.456.789-01'
-                ]
+                    'taxId' => '123.456.789-01',
+                ],
             ],
             'allowCoupons' => false,
-            'coupons' => []
-        ]
+            'coupons' => [],
+        ],
     ];
 
     $response = new Response(200, [], json_encode($responseData));
@@ -73,7 +73,7 @@ it('creates a billing successfully', function () {
                 'Acesso ao programa fitness premium por 1 mês.',
                 2,
                 2000
-            )
+            ),
         ],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
@@ -139,13 +139,13 @@ it('lists billing successfully', function () {
                 'customer' => [
                     'id' => 'bill_123456', 'metadata' => [
                         'name' => 'Daniel Lima', 'cellphone' => '(11) 4002-8922',
-                        'email' => 'daniel_lima@abacatepay.com', 'taxId' => '123.456.789-01'
-                    ]
+                        'email' => 'daniel_lima@abacatepay.com', 'taxId' => '123.456.789-01',
+                    ],
                 ],
                 'allowCoupons' => false,
-                'coupons' => []
-            ]
-        ]
+                'coupons' => [],
+            ],
+        ],
     ];
 
     $response = new Response(200, [], json_encode($responseData));
@@ -189,8 +189,8 @@ it('creates billing with minimal data', function () {
             'nextBilling' => '2025-11-23',
             'customer' => null,
             'allowCoupons' => true,
-            'coupons' => []
-        ]
+            'coupons' => [],
+        ],
     ];
 
     $response = new Response(200, [], json_encode($responseData));

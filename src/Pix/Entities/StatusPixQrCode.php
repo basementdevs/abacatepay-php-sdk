@@ -26,7 +26,7 @@ class StatusPixQrCode implements JsonSerializable
     {
         return [
             'status' => $this->status->value,
-            'expiresAt' => $this->expiresAt
+            'expiresAt' => $this->expiresAt,
         ];
     }
 }

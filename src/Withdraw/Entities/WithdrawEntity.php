@@ -39,7 +39,6 @@ final readonly class WithdrawEntity implements JsonSerializable
         );
     }
 
-
     public function jsonSerialize(): array
     {
         return [
