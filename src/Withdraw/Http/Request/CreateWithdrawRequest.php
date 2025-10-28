@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Basement\AbacatePay\Withdraw\Http\Request;
 
 use Basement\AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
+use Basement\AbacatePay\Withdraw\Http\Builder\CreateWithdrawRequestBuilder;
 use JsonSerializable;
 
 final readonly class CreateWithdrawRequest implements JsonSerializable
@@ -16,6 +17,11 @@ final readonly class CreateWithdrawRequest implements JsonSerializable
         public WithdrawPixRequest $pix,
         public ?string $description = null,
     ) {}
+
+    public static function builder(): CreateWithdrawRequestBuilder
+    {
+        return new CreateWithdrawRequestBuilder;
+    }
 
     public static function make(array $data): self
     {
