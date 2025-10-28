@@ -15,8 +15,7 @@ final readonly class StoreResource
     public const string BASE_PATH = 'store';
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException

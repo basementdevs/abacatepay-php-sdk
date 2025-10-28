@@ -12,8 +12,7 @@ final readonly class StoreEntity
         public string $id,
         public string $name,
         public StoreBalanceResponse $balance,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

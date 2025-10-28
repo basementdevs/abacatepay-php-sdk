@@ -19,8 +19,7 @@ final readonly class CustomerResource
 
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException

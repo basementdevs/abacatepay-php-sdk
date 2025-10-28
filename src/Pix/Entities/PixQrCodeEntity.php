@@ -24,8 +24,7 @@ final readonly class PixQrCodeEntity implements JsonSerializable
         public string            $createdAt,
         public string            $updatedAt,
         public string            $expiresAt,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

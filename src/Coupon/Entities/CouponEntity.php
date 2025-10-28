@@ -21,8 +21,7 @@ final readonly class CouponEntity implements JsonSerializable
         public string $notes,
         public string $createdAt,
         public string $updatedAt,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

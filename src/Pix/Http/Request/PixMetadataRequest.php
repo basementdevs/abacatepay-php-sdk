@@ -8,8 +8,7 @@ final readonly class PixMetadataRequest
 {
     public function __construct(
         public string $externalId,
-    ) {
-    }
+    ) {}
 
     public static function make(array $data): self
     {

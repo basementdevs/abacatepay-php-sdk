@@ -10,8 +10,7 @@ final readonly class CouponResponse
 {
     public function __construct(
         public CouponEntity $data,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {
@@ -19,5 +18,4 @@ final readonly class CouponResponse
             data: CouponEntity::fromArray($data['data']),
         );
     }
-
 }

@@ -21,8 +21,7 @@ final readonly class WithdrawEntity implements JsonSerializable
         public ?string $externalId,
         public string $created_at,
         public string $updated_at,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

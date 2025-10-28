@@ -6,7 +6,7 @@ Permite gerenciar clientes, cobranças e transações de forma simples usando PH
 ---
 ## Requisitos
 
-- PHP 8.4 ou maior
+- PHP 8.3 ou maior
 - Composer
 - Conta na AbacatePay
 - API Token
@@ -14,7 +14,7 @@ Permite gerenciar clientes, cobranças e transações de forma simples usando PH
 ## Instalação
 
 ```bash
-composer require abacatepay/client-php
+composer require basementdevs/abacatepay-php-sdk
 ```
 
 ## Features
@@ -180,7 +180,6 @@ print_r($response);
 | Código | Exceção                               | Descrição                 |
 | ------ | ------------------------------------- | ------------------------- |
 | 401    | `AbacatePayException::unauthorized()` | Token de autenticação inválido ou ausente. |
-| 500    | `AbacatePayException`                 | Erro interno na API       |
 
 ---
 

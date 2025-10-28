@@ -19,8 +19,7 @@ final readonly class WithdrawResource
 
     public function __construct(
         private Client $client
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException

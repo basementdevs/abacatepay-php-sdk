@@ -10,8 +10,7 @@ final readonly class CreatePixQrCodeResponse
 {
     public function __construct(
         public PixQrCodeEntity $data,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

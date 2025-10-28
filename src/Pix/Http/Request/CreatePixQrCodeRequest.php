@@ -14,8 +14,7 @@ final readonly class CreatePixQrCodeRequest implements JsonSerializable
         public string $description,
         public PixCustomerRequest $customer,
         public PixMetadataRequest $metadata,
-    ) {
-    }
+    ) {}
 
     public static function make(array $data): self
     {
