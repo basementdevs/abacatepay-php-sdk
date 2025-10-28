@@ -10,8 +10,7 @@ final readonly class StoreBalanceResponse
         public int $available,
         public int $pending,
         public int $blocked
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

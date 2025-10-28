@@ -10,6 +10,7 @@ use Basement\AbacatePay\Pix\Http\Response\CheckStatusPixQrCodeResponse;
 use Basement\AbacatePay\Pix\Http\Response\CreatePixQrCodeResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
 final readonly class PixResource
@@ -18,8 +19,7 @@ final readonly class PixResource
 
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException
@@ -49,15 +49,15 @@ final readonly class PixResource
     }
 
     /**
-    * @throws AbacatePayException
-    * @throws JsonException
-    */
+     * @throws AbacatePayException
+     * @throws JsonException
+     */
     public function checkStatus(string $id): CheckStatusPixQrCodeResponse
     {
         try {
             $response = $this->client->post(sprintf('%s/check', self::BASE_PATH), [
                 'query' => [
-                    'id' => $id
+                    'id' => $id,
                 ],
             ]);
 

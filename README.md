@@ -13,7 +13,7 @@ Permite gerenciar clientes, cobranças e transações de forma simples usando PH
 
 ## Instalação
 
-```sh
+```bash
 composer require basementdevs/abacatepay-php-sdk
 ```
 
@@ -180,7 +180,6 @@ print_r($response);
 | Código | Exceção                               | Descrição                 |
 | ------ | ------------------------------------- | ------------------------- |
 | 401    | `AbacatePayException::unauthorized()` | Token de autenticação inválido ou ausente. |
-| 500    | `AbacatePayException`                 | Erro interno na API       |
 
 ---
 

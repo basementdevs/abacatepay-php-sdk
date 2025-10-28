@@ -23,7 +23,7 @@ final class CreateCouponRequestBuilder
 
     public static function make(): self
     {
-        return new self();
+        return new self;
     }
 
     public function code(string $code): self
@@ -90,19 +90,15 @@ final class CreateCouponRequestBuilder
         if ($this->code === null) {
             $missing[] = 'code';
         }
-
         if ($this->notes === null) {
             $missing[] = 'notes';
         }
-
         if ($this->maxRedeems === null) {
             $missing[] = 'maxRedeems';
         }
-
-        if (!$this->discountKind instanceof CouponDiscountKindEnum) {
+        if (! $this->discountKind instanceof CouponDiscountKindEnum) {
             $missing[] = 'discountKind';
         }
-
         if ($this->discount === null) {
             $missing[] = 'discount';
         }

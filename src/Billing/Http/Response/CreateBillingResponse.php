@@ -10,8 +10,7 @@ final readonly class CreateBillingResponse
 {
     public function __construct(
         public BillingEntity $data,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

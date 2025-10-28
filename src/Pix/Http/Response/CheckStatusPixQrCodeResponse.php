@@ -10,8 +10,7 @@ class CheckStatusPixQrCodeResponse
 {
     public function __construct(
         public StatusPixQrCode $data
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

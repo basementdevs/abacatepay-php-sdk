@@ -148,22 +148,18 @@ final class CreateBillingRequestBuilder
     public function build(): CreateBillingRequest
     {
         $errors = [];
-        if (!$this->frequency instanceof BillingFrequencyEnum) {
+        if (! $this->frequency instanceof BillingFrequencyEnum) {
             $errors[] = 'frequency';
         }
-
-        if ($this->methods === []) {
+        if (count($this->methods) === 0) {
             $errors[] = 'methods (at least one)';
         }
-
-        if ($this->products === []) {
+        if (count($this->products) === 0) {
             $errors[] = 'products (at least one)';
         }
-
         if ($this->returnUrl === null) {
             $errors[] = 'returnUrl';
         }
-
         if ($this->completionUrl === null) {
             $errors[] = 'completionUrl';
         }

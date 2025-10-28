@@ -26,23 +26,22 @@ final class CreateBillingRequest
         public ?string $customerId,
         public ?CustomerRequest $customer,
         public ?string $externalId
-    ) {
-    }
+    ) {}
 
     public static function make(): CreateBillingRequestBuilder
     {
-        return new CreateBillingRequestBuilder();
+        return new CreateBillingRequestBuilder;
     }
 
     public static function oneTime(): CreateBillingRequestBuilder
     {
-        return (new CreateBillingRequestBuilder())
+        return (new CreateBillingRequestBuilder)
             ->frequency(BillingFrequencyEnum::OneTime);
     }
 
     public static function multipleTimes(): CreateBillingRequestBuilder
     {
-        return (new CreateBillingRequestBuilder())
+        return (new CreateBillingRequestBuilder)
             ->frequency(BillingFrequencyEnum::MultiplePayments);
     }
 

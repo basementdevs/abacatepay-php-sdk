@@ -12,8 +12,7 @@ final readonly class ProductRequest
         public string $description,
         public int    $quantity,
         public int    $price,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

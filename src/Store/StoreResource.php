@@ -17,8 +17,7 @@ final readonly class StoreResource
 
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException

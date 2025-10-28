@@ -16,8 +16,7 @@ final readonly class CreateCouponRequest implements JsonSerializable
         public CouponDiscountKindEnum $discountKind,
         public int $discount,
         public ?array $metadata,
-    ) {
-    }
+    ) {}
 
     public static function make(array $data): self
     {
@@ -33,18 +32,18 @@ final readonly class CreateCouponRequest implements JsonSerializable
 
     public static function builder(): CreateCouponRequestBuilder
     {
-        return new CreateCouponRequestBuilder();
+        return new CreateCouponRequestBuilder;
     }
 
     public function jsonSerialize(): array
     {
         return [
-                'code' => $this->code,
-                'notes' => $this->notes,
-                'maxRedeems' => $this->maxRedeems,
-                'discountKind' => $this->discountKind->value,
-                'discount' => $this->discount,
-                'metadata' => $this->metadata,
+            'code' => $this->code,
+            'notes' => $this->notes,
+            'maxRedeems' => $this->maxRedeems,
+            'discountKind' => $this->discountKind->value,
+            'discount' => $this->discount,
+            'metadata' => $this->metadata,
         ];
     }
 }

@@ -30,8 +30,7 @@ final readonly class BillingEntity implements JsonSerializable
         public ?CustomerEntity $customer,
         public ?bool $allow_coupons,
         public array $coupons,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

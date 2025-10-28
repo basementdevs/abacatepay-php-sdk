@@ -11,9 +11,7 @@ final readonly class CreateCustomerRequest
         public string $cellphone,
         public string $email,
         public string $taxId,
-    ) {
-    }
-
+    ) {}
 
     public function toArray(): array
     {
