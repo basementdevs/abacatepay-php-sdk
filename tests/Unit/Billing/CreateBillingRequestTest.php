@@ -16,7 +16,7 @@ it('creates request with all fields', function () {
             description: 'Acesso ao programa fitness premium por 1 mês.',
             quantity: 2,
             price: 2000
-        )
+        ),
     ];
 
     $customer = new CustomerRequest(
@@ -61,7 +61,7 @@ it('converts to array with all fields', function () {
             description: 'Product Description',
             quantity: 2,
             price: 2000
-        )
+        ),
     ];
 
     $customer = new CustomerRequest(
@@ -89,7 +89,7 @@ it('converts to array with all fields', function () {
 
     expect($array)->toHaveKeys([
         'frequency', 'methods', 'products', 'returnUrl', 'completionUrl',
-        'customerId', 'customer', 'allowCoupons', 'coupons', 'externalId'
+        'customerId', 'customer', 'allowCoupons', 'coupons', 'externalId',
     ])->and($array['frequency'])->toBe(BillingFrequencyEnum::MultiplePayments)
         ->and($array['methods'])->toHaveCount(2)
         ->and($array['allowCoupons'])->toBeTrue()
@@ -115,7 +115,7 @@ it('converts to array without optional fields', function () {
 
     expect($array)->not->toHaveKeys(['customerId', 'customer', 'externalId'])
         ->and($array)->toHaveKeys([
-            'frequency', 'methods', 'products', 'returnUrl', 'completionUrl', 'allowCoupons', 'coupons'
+            'frequency', 'methods', 'products', 'returnUrl', 'completionUrl', 'allowCoupons', 'coupons',
         ]);
 });
 

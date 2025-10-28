@@ -151,15 +151,19 @@ final class CreateBillingRequestBuilder
         if (! $this->frequency instanceof BillingFrequencyEnum) {
             $errors[] = 'frequency';
         }
-        if (count($this->methods) === 0) {
+
+        if ($this->methods === []) {
             $errors[] = 'methods (at least one)';
         }
-        if (count($this->products) === 0) {
+
+        if ($this->products === []) {
             $errors[] = 'products (at least one)';
         }
+
         if ($this->returnUrl === null) {
             $errors[] = 'returnUrl';
         }
+
         if ($this->completionUrl === null) {
             $errors[] = 'completionUrl';
         }

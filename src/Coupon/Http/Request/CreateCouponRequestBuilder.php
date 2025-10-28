@@ -90,15 +90,19 @@ final class CreateCouponRequestBuilder
         if ($this->code === null) {
             $missing[] = 'code';
         }
+
         if ($this->notes === null) {
             $missing[] = 'notes';
         }
+
         if ($this->maxRedeems === null) {
             $missing[] = 'maxRedeems';
         }
+
         if (! $this->discountKind instanceof CouponDiscountKindEnum) {
             $missing[] = 'discountKind';
         }
+
         if ($this->discount === null) {
             $missing[] = 'discount';
         }

@@ -11,7 +11,7 @@ final readonly class WithdrawPixRequest implements JsonSerializable
 {
     public function __construct(
         public WithdrawPixTypeEnum $type,
-        public string              $key
+        public string $key
     ) {}
 
     public static function make(array $data): self

@@ -10,8 +10,8 @@ final readonly class ProductRequest
         public string $externalId,
         public string $name,
         public string $description,
-        public int    $quantity,
-        public int    $price,
+        public int $quantity,
+        public int $price,
     ) {}
 
     public function toArray(): array

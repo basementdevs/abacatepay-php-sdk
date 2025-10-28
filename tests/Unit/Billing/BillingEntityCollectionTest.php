@@ -19,7 +19,7 @@ beforeEach(function () {
             'nextBilling' => 'null',
             'customer' => null,
             'allowCoupons' => false,
-            'coupons' => []
+            'coupons' => [],
         ];
     };
 });
@@ -149,12 +149,12 @@ it('collection with complex billing data', function () {
                     'name' => 'John Doe',
                     'email' => 'john@example.com',
                     'cellphone' => '(11) 99999-9999',
-                    'taxId' => '123.456.789-00'
-                ]
+                    'taxId' => '123.456.789-00',
+                ],
             ],
             'allowCoupons' => true,
-            'coupons' => ['PROMO10', 'PROMO20']
-        ]
+            'coupons' => ['PROMO10', 'PROMO20'],
+        ],
     ];
 
     $collection = BillingEntityCollection::fromArray($data);

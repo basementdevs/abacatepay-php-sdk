@@ -44,7 +44,7 @@ it('should be able to create coupon', function (): void {
         'discountKind' => CouponDiscountKindEnum::Percentage->value,
         'discount' => 123,
         'metadata' => [
-            'null' => null
+            'null' => null,
         ],
     ]);
 

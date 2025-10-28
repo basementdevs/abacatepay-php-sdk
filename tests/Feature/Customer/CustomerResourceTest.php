@@ -56,7 +56,7 @@ it('should throw unauthorized exception', function () {
             'Unauthorized',
             new Request('GET', 'test-abacatepay'),
             new Response(401, [], json_encode(['error' => 'Unauthorized'], JSON_THROW_ON_ERROR))
-        )
+        ),
     ]);
 
     $client = new Client(['handler' => $handler]);
@@ -72,7 +72,7 @@ it('throws internal server error exception', function () {
             'Internal Server Error',
             new Request('POST', 'test-abacatepay'),
             new Response(500, [], json_encode(['error' => 'server crashed'], JSON_THROW_ON_ERROR))
-        )
+        ),
     ]);
 
     $client = new Client(['handler' => $handler]);

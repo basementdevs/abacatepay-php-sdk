@@ -14,16 +14,16 @@ final readonly class PixQrCodeEntity implements JsonSerializable
      * @param  BillingMethodEnum[]  $methods
      */
     public function __construct(
-        public string            $id,
-        public int               $amount,
+        public string $id,
+        public int $amount,
         public BillingStatusEnum $status,
-        public bool              $devMode,
-        public string            $brCode,
-        public string            $brCodeBase64,
-        public int               $platformFee,
-        public string            $createdAt,
-        public string            $updatedAt,
-        public string            $expiresAt,
+        public bool $devMode,
+        public string $brCode,
+        public string $brCodeBase64,
+        public int $platformFee,
+        public string $createdAt,
+        public string $updatedAt,
+        public string $expiresAt,
     ) {}
 
     public static function fromArray(array $data): self

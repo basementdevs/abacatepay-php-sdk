@@ -39,7 +39,6 @@ final readonly class CouponEntity implements JsonSerializable
         );
     }
 
-
     public function jsonSerialize(): array
     {
         return [
