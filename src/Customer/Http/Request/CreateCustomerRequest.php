@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Customer\Http\Request;
 
+use Basement\AbacatePay\Customer\Http\Builder\CreateCustomerRequestBuilder;
+
 final readonly class CreateCustomerRequest
 {
     public function __construct(
@@ -12,6 +14,11 @@ final readonly class CreateCustomerRequest
         public string $email,
         public string $taxId,
     ) {}
+
+    public static function builder(): CreateCustomerRequestBuilder
+    {
+        return new CreateCustomerRequestBuilder;
+    }
 
     public function toArray(): array
     {
