@@ -10,6 +10,7 @@ use Basement\AbacatePay\Billing\Http\Response\ListBillingResponse;
 use Basement\AbacatePay\Exception\AbacatePayException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Symfony\Component\HttpFoundation\Response;
 
 final readonly class BillingResource
@@ -18,8 +19,7 @@ final readonly class BillingResource
 
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AbacatePayException

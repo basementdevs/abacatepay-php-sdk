@@ -23,7 +23,7 @@ final class CreateCouponRequestBuilder
 
     public static function make(): self
     {
-        return new self();
+        return new self;
     }
 
     public function code(string $code): self
@@ -96,14 +96,14 @@ final class CreateCouponRequestBuilder
         if ($this->maxRedeems === null) {
             $missing[] = 'maxRedeems';
         }
-        if ($this->discountKind === null) {
+        if (! $this->discountKind instanceof CouponDiscountKindEnum) {
             $missing[] = 'discountKind';
         }
         if ($this->discount === null) {
             $missing[] = 'discount';
         }
 
-        if (! empty($missing)) {
+        if ($missing !== []) {
             throw new InvalidArgumentException('Missing required fields: '.implode(', ', $missing));
         }
 

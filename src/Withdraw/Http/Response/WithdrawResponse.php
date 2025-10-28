@@ -10,8 +10,7 @@ final readonly class WithdrawResponse
 {
     public function __construct(
         public WithdrawEntity $data,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

@@ -11,8 +11,7 @@ final readonly class PixCustomerRequest
         public string $cellphone,
         public string $email,
         public string $taxId,
-    ) {
-    }
+    ) {}
 
     public static function make(array $data): self
     {

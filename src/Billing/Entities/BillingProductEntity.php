@@ -12,8 +12,7 @@ final readonly class BillingProductEntity implements JsonSerializable
         public string $id,
         public string $externalId,
         public int $quantity,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

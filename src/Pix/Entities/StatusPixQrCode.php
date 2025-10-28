@@ -12,8 +12,7 @@ class StatusPixQrCode implements JsonSerializable
     public function __construct(
         public StatusQrCode $status,
         public string $expiresAt,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

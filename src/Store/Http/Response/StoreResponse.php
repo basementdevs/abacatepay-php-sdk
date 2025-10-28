@@ -10,8 +10,7 @@ final readonly class StoreResponse
 {
     public function __construct(
         public StoreEntity $data,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

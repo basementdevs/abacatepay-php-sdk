@@ -15,8 +15,7 @@ final readonly class CreateWithdrawRequest implements JsonSerializable
         public int                 $amount,
         public WithdrawPixRequest  $pix,
         public ?string             $description = null,
-    ) {
-    }
+    ) {}
 
     public static function make(array $data): self
     {
