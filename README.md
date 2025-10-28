@@ -6,15 +6,15 @@ Permite gerenciar clientes, cobranças e transações de forma simples usando PH
 ---
 ## Requisitos
 
-- PHP 8.4 ou maior
+- PHP 8.3 ou maior
 - Composer
 - Conta na AbacatePay
 - API Token
 
 ## Instalação
 
-```bash
-composer require abacatepay/client-php
+```sh
+composer require basementdevs/abacatepay-php-sdk
 ```
 
 ## Features
