@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Pix\Http\Request;
 
+use Basement\AbacatePay\Pix\Http\Builder\PixCustomerRequestBuilder;
+
 final readonly class PixCustomerRequest
 {
     public function __construct(
@@ -12,6 +14,11 @@ final readonly class PixCustomerRequest
         public string $email,
         public string $taxId,
     ) {}
+
+    public static function builder(): PixCustomerRequestBuilder
+    {
+        return new PixCustomerRequestBuilder;
+    }
 
     public static function make(array $data): self
     {

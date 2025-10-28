@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Pix\Http\Request;
 
+use Basement\AbacatePay\Pix\Http\Builder\CreatePixQrCodeRequestBuilder;
 use JsonSerializable;
 
 final readonly class CreatePixQrCodeRequest implements JsonSerializable
@@ -15,6 +16,11 @@ final readonly class CreatePixQrCodeRequest implements JsonSerializable
         public PixCustomerRequest $customer,
         public PixMetadataRequest $metadata,
     ) {}
+
+    public static function builder(): CreatePixQrCodeRequestBuilder
+    {
+        return new CreatePixQrCodeRequestBuilder;
+    }
 
     public static function make(array $data): self
     {
