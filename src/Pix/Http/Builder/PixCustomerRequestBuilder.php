@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Pix\Http\Builder;
 
+use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Pix\Http\Request\PixCustomerRequest;
-use InvalidArgumentException;
 
 final class PixCustomerRequestBuilder
 {
@@ -45,6 +45,9 @@ final class PixCustomerRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): PixCustomerRequest
     {
         $errors = [];
@@ -66,7 +69,7 @@ final class PixCustomerRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new PixCustomerRequest(

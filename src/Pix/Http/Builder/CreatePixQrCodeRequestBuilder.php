@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Pix\Http\Builder;
 
+use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
 use Basement\AbacatePay\Pix\Http\Request\PixCustomerRequest;
 use Basement\AbacatePay\Pix\Http\Request\PixMetadataRequest;
-use InvalidArgumentException;
 
 final class CreatePixQrCodeRequestBuilder
 {
@@ -56,6 +56,9 @@ final class CreatePixQrCodeRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): CreatePixQrCodeRequest
     {
         $errors = [];
@@ -81,7 +84,7 @@ final class CreatePixQrCodeRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new CreatePixQrCodeRequest(
