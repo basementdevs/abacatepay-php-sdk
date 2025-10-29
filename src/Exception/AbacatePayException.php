@@ -24,6 +24,7 @@ final class AbacatePayException extends Exception
     public static function missingRequiredFields(array $fields = []): self
     {
         $message = 'Missing required fields: '.implode(', ', $fields);
+
         return new self($message, 400);
     }
 }

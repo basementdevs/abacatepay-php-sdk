@@ -8,7 +8,6 @@ use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
 use Basement\AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
 use Basement\AbacatePay\Withdraw\Http\Request\WithdrawPixRequest;
-use InvalidArgumentException;
 
 final class CreateWithdrawRequestBuilder
 {

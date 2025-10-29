@@ -8,7 +8,6 @@ use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Pix\Http\Request\CreatePixQrCodeRequest;
 use Basement\AbacatePay\Pix\Http\Request\PixCustomerRequest;
 use Basement\AbacatePay\Pix\Http\Request\PixMetadataRequest;
-use InvalidArgumentException;
 
 final class CreatePixQrCodeRequestBuilder
 {

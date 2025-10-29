@@ -118,7 +118,7 @@ it('throws exception on unauthorized', function () {
         externalId: null
     );
 
-    expect(fn() => $billingResource->create($request))->toThrow(AbacatePayException::class);
+    expect(fn () => $billingResource->create($request))->toThrow(AbacatePayException::class);
 });
 
 it('throws internal server error exception', function () {
@@ -147,6 +147,6 @@ it('throws internal server error exception', function () {
         externalId: null
     );
 
-    expect(fn() => $billingResource->create($request))
+    expect(fn () => $billingResource->create($request))
         ->toThrow(AbacatePayException::class, 'Internal Server Error');
 });

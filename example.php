@@ -19,7 +19,6 @@ $customer = $client->customer()->create(
         ->taxId('209.206.850-48')
         ->build());
 
-
 $response = $client->billing()
     ->create(
         CreateBillingRequest::oneTime()
@@ -37,6 +36,5 @@ $response = $client->billing()
                 ->build())
             ->build()
     );
-
 
 var_dump($response);

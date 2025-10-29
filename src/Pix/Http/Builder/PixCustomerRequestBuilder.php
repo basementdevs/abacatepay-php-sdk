@@ -6,7 +6,6 @@ namespace Basement\AbacatePay\Pix\Http\Builder;
 
 use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Pix\Http\Request\PixCustomerRequest;
-use InvalidArgumentException;
 
 final class PixCustomerRequestBuilder
 {

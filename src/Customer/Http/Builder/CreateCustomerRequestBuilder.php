@@ -6,7 +6,6 @@ namespace Basement\AbacatePay\Customer\Http\Builder;
 
 use Basement\AbacatePay\Customer\Http\Request\CreateCustomerRequest;
 use Basement\AbacatePay\Exception\AbacatePayException;
-use InvalidArgumentException;
 
 final class CreateCustomerRequestBuilder
 {
