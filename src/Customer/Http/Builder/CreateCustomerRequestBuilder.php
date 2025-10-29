@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Basement\AbacatePay\Customer\Http\Builder;
 
 use Basement\AbacatePay\Customer\Http\Request\CreateCustomerRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
+use InvalidArgumentException;
 
 final class CreateCustomerRequestBuilder
 {
@@ -44,6 +46,9 @@ final class CreateCustomerRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): CreateCustomerRequest
     {
         $errors = [];
@@ -65,7 +70,7 @@ final class CreateCustomerRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new CreateCustomerRequest(

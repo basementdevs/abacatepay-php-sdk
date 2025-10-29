@@ -9,6 +9,7 @@ use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
 use Basement\AbacatePay\Billing\Http\Request\CreateBillingRequest;
 use Basement\AbacatePay\Billing\Http\Request\ProductRequest;
 use Basement\AbacatePay\Customer\Http\Request\CustomerRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use InvalidArgumentException;
 
 final class CreateBillingRequestBuilder
@@ -147,6 +148,9 @@ final class CreateBillingRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): CreateBillingRequest
     {
         $errors = [];
@@ -175,7 +179,7 @@ final class CreateBillingRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new CreateBillingRequest(

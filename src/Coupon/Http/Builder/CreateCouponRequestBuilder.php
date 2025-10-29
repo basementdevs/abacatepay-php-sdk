@@ -6,6 +6,7 @@ namespace Basement\AbacatePay\Coupon\Http\Builder;
 
 use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
 use Basement\AbacatePay\Coupon\Http\Request\CreateCouponRequest;
+use Basement\AbacatePay\Exception\AbacatePayException;
 use InvalidArgumentException;
 
 final class CreateCouponRequestBuilder
@@ -80,6 +81,9 @@ final class CreateCouponRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): CreateCouponRequest
     {
         $missing = [];
@@ -104,7 +108,7 @@ final class CreateCouponRequestBuilder
         }
 
         if ($missing !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $missing));
+            throw AbacatePayException::missingRequiredFields($missing);
         }
 
         return new CreateCouponRequest(

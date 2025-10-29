@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Withdraw\Http\Builder;
 
+use Basement\AbacatePay\Exception\AbacatePayException;
 use Basement\AbacatePay\Withdraw\Enums\WithdrawMethodsEnum;
 use Basement\AbacatePay\Withdraw\Http\Request\CreateWithdrawRequest;
 use Basement\AbacatePay\Withdraw\Http\Request\WithdrawPixRequest;
@@ -56,6 +57,9 @@ final class CreateWithdrawRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): CreateWithdrawRequest
     {
         $errors = [];
@@ -77,7 +81,7 @@ final class CreateWithdrawRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new CreateWithdrawRequest(

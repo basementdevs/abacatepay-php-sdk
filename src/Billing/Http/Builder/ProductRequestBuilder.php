@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Basement\AbacatePay\Billing\Http\Builder;
 
 use Basement\AbacatePay\Billing\Http\Request\ProductRequest;
-use InvalidArgumentException;
+use Basement\AbacatePay\Exception\AbacatePayException;
 
 final class ProductRequestBuilder
 {
@@ -54,6 +54,9 @@ final class ProductRequestBuilder
         return $this;
     }
 
+    /**
+     * @throws AbacatePayException
+     */
     public function build(): ProductRequest
     {
         $errors = [];
@@ -79,7 +82,7 @@ final class ProductRequestBuilder
         }
 
         if ($errors !== []) {
-            throw new InvalidArgumentException('Missing required fields: '.implode(', ', $errors));
+            throw AbacatePayException::missingRequiredFields($errors);
         }
 
         return new ProductRequest(

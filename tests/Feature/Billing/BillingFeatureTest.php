@@ -65,6 +65,8 @@ it('creates billing completely', function () {
         ],
         return_url: 'https://example.com/billing',
         completion_url: 'https://example.com/completion',
+        allow_coupons: false,
+        coupons: ['ABKT10', 'ABKT5', 'PROMO10'],
         customerId: 'cust_abcdefghij',
         customer: new CustomerRequest(
             id: 'id123',
@@ -73,8 +75,6 @@ it('creates billing completely', function () {
             email: 'daniel_lima@abacatepay.com',
             tax_id: '123.456.789-01'
         ),
-        allow_coupons: false,
-        coupons: ['ABKT10', 'ABKT5', 'PROMO10'],
         externalId: 'seu_id_123'
     );
 
@@ -118,7 +118,7 @@ it('throws exception on unauthorized', function () {
         externalId: null
     );
 
-    expect(fn () => $billingResource->create($request))->toThrow(AbacatePayException::class);
+    expect(fn() => $billingResource->create($request))->toThrow(AbacatePayException::class);
 });
 
 it('throws internal server error exception', function () {
@@ -147,6 +147,6 @@ it('throws internal server error exception', function () {
         externalId: null
     );
 
-    expect(fn () => $billingResource->create($request))
+    expect(fn() => $billingResource->create($request))
         ->toThrow(AbacatePayException::class, 'Internal Server Error');
 });
