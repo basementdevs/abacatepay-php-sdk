@@ -29,7 +29,7 @@ final readonly class PixResource
     {
         try {
             $response = $this->client->post(sprintf('%s/create', self::BASE_PATH), [
-                'json' => $request->jsonSerialize(),
+                'json' => $request->toArray(),
             ]);
 
             $responsePayload = json_decode(
