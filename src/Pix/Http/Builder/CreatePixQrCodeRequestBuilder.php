@@ -67,10 +67,10 @@ final class CreatePixQrCodeRequestBuilder
 
         return new CreatePixQrCodeRequest(
             amount: $this->amount,
-            expiresIn: $this->expiresIn ?? 0,
-            description: $this->description ?? '',
-            customer: $this->customer ?? new PixCustomerRequest('', '', '', ''),
-            metadata: $this->metadata ?? new PixMetadataRequest(''),
+            expiresIn: $this->expiresIn ?? null,
+            description: $this->description ?? null,
+            customer: $this->customer,
+            metadata: $this->metadata,
         );
     }
 }

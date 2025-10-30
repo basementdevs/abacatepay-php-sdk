@@ -58,6 +58,24 @@ it('builds a valid CreatePixQrCodeRequest', function () {
         ]);
 });
 
+it('should allow creating a QR code with only required fields', function (): void {
+    $request = CreatePixQrCodeRequest::builder()
+        ->amount(250)
+        ->build();
+
+    expect($request)
+        ->toBeInstanceOf(CreatePixQrCodeRequest::class)
+        ->and($request->amount)->toBe(250)
+        ->and($request->expiresIn)->toBeNull()
+        ->and($request->description)->toBeNull()
+        ->and($request->customer)->toBeNull()
+        ->and($request->metadata)->toBeNull();
+
+    $serialized = $request->toArray();
+
+    expect($serialized)->toBe(['amount' => 250]);
+});
+
 it('throws AbacatePayException when missing required fields', function () {
     CreatePixQrCodeRequest::builder()->build();
 })->throws(AbacatePayException::class, 'Missing required fields');

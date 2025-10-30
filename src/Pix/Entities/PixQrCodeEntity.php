@@ -9,7 +9,6 @@ use JsonSerializable;
 
 final readonly class PixQrCodeEntity implements JsonSerializable
 {
-
     public function __construct(
         public string $id,
         public int $amount,

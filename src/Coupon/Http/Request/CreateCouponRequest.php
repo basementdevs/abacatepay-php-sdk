@@ -6,9 +6,8 @@ namespace Basement\AbacatePay\Coupon\Http\Request;
 
 use Basement\AbacatePay\Coupon\Enums\CouponDiscountKindEnum;
 use Basement\AbacatePay\Coupon\Http\Builder\CreateCouponRequestBuilder;
-use JsonSerializable;
 
-final readonly class CreateCouponRequest implements JsonSerializable
+final readonly class CreateCouponRequest
 {
     public function __construct(
         public string $code,
@@ -36,7 +35,7 @@ final readonly class CreateCouponRequest implements JsonSerializable
         return new CreateCouponRequestBuilder;
     }
 
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         return [
             'code' => $this->code,

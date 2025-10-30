@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Basement\AbacatePay\Pix\Http\Request;
 
 use Basement\AbacatePay\Pix\Http\Builder\CreatePixQrCodeRequestBuilder;
-use JsonSerializable;
 
 final readonly class CreatePixQrCodeRequest
 {
