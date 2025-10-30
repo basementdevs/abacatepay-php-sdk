@@ -7,14 +7,14 @@ namespace Basement\AbacatePay\Pix\Http\Request;
 use Basement\AbacatePay\Pix\Http\Builder\CreatePixQrCodeRequestBuilder;
 use JsonSerializable;
 
-final readonly class CreatePixQrCodeRequest implements JsonSerializable
+final readonly class CreatePixQrCodeRequest
 {
     public function __construct(
         public int $amount,
-        public int $expiresIn,
-        public string $description,
-        public PixCustomerRequest $customer,
-        public PixMetadataRequest $metadata,
+        public ?int $expiresIn,
+        public ?string $description,
+        public ?PixCustomerRequest $customer,
+        public ?PixMetadataRequest $metadata,
     ) {}
 
     public static function builder(): CreatePixQrCodeRequestBuilder
@@ -26,21 +26,33 @@ final readonly class CreatePixQrCodeRequest implements JsonSerializable
     {
         return new self(
             amount: $data['amount'],
-            expiresIn: $data['expiresIn'],
-            description: $data['description'],
-            customer: $data['customer'],
-            metadata: $data['metadata'],
+            expiresIn: $data['expiresIn'] ?? null,
+            description: $data['description'] ?? null,
+            customer: $data['customer'] ?? null,
+            metadata: $data['metadata'] ?? null,
         );
     }
 
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        return [
-            'amount' => $this->amount,
-            'expiresIn' => $this->expiresIn,
-            'description' => $this->description,
-            'customer' => $this->customer->toArray(),
-            'metadata' => $this->metadata->toArray(),
-        ];
+        $data = ['amount' => $this->amount];
+
+        if ($this->expiresIn !== null) {
+            $data['expiresIn'] = $this->expiresIn;
+        }
+
+        if ($this->description !== null) {
+            $data['description'] = $this->description;
+        }
+
+        if ($this->customer instanceof PixCustomerRequest) {
+            $data['customer'] = $this->customer->toArray();
+        }
+
+        if ($this->metadata instanceof PixMetadataRequest) {
+            $data['metadata'] = $this->metadata->toArray();
+        }
+
+        return $data;
     }
 }
