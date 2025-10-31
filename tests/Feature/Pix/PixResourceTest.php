@@ -87,6 +87,6 @@ it('should throw exception when anything goes wrong', function () {
     $client = new Client(['handler' => $handler]);
     $resource = new PixResource(client: $client);
 
-    expect(fn() => $resource->createQrCode($this->requestDto))
+    expect(fn () => $resource->createQrCode($this->requestDto))
         ->toThrow(AbacatePayException::class, 'Token de autenticação inválido ou ausente.');
 });
