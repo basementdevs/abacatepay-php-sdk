@@ -28,28 +28,28 @@ final class CreatePixQrCodeRequestBuilder
         return $this;
     }
 
-    public function expiresIn(int $seconds): self
+    public function expiresIn(?int $seconds): self
     {
         $this->expiresIn = $seconds;
 
         return $this;
     }
 
-    public function description(string $description): self
+    public function description(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function customer(PixCustomerRequest $customer): self
+    public function customer(?PixCustomerRequest $customer): self
     {
         $this->customer = $customer;
 
         return $this;
     }
 
-    public function metadata(PixMetadataRequest $metadata): self
+    public function metadata(?PixMetadataRequest $metadata): self
     {
         $this->metadata = $metadata;
 
@@ -61,36 +61,14 @@ final class CreatePixQrCodeRequestBuilder
      */
     public function build(): CreatePixQrCodeRequest
     {
-        $errors = [];
-
         if ($this->amount === null) {
-            $errors[] = 'amount';
-        }
-
-        if ($this->expiresIn === null) {
-            $errors[] = 'expiresIn';
-        }
-
-        if ($this->description === null) {
-            $errors[] = 'description';
-        }
-
-        if (! $this->customer instanceof PixCustomerRequest) {
-            $errors[] = 'customer';
-        }
-
-        if (! $this->metadata instanceof PixMetadataRequest) {
-            $errors[] = 'metadata';
-        }
-
-        if ($errors !== []) {
-            throw AbacatePayException::missingRequiredFields($errors);
+            throw AbacatePayException::missingRequiredFields(['amount']);
         }
 
         return new CreatePixQrCodeRequest(
             amount: $this->amount,
-            expiresIn: $this->expiresIn,
-            description: $this->description,
+            expiresIn: $this->expiresIn ?? null,
+            description: $this->description ?? null,
             customer: $this->customer,
             metadata: $this->metadata,
         );

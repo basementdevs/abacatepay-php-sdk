@@ -16,20 +16,24 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 beforeEach(function () {
-    $this->requestDto = CreatePixQrCodeRequest::make([
-        'amount' => 100,
-        'expiresIn' => 10,
-        'description' => 'abacate description',
-        'customer' => PixCustomerRequest::make([
-            'name' => 'customer name',
-            'cellphone' => '11982516627',
-            'email' => 'joe@doe.com',
-            'taxId' => '123.456.789-01',
-        ]),
-        'metadata' => PixMetadataRequest::make([
-            'externalId' => 'customer-id-123',
-        ]),
-    ]);
+    $this->requestDto = CreatePixQrCodeRequest::builder()
+        ->amount(100)
+        ->expiresIn(10)
+        ->description('abacate description')
+        ->customer(
+            PixCustomerRequest::builder()
+                ->name('customer name')
+                ->cellphone('11982516627')
+                ->email('joe@doe.com')
+                ->taxId('123.456.789-01')
+                ->build()
+        )
+        ->metadata(
+            PixMetadataRequest::builder()
+                ->externalId('customer-id-123')
+                ->build()
+        )
+        ->build();
 });
 
 it('should be able to create a Qr for pix', function (): void {
@@ -56,9 +60,7 @@ it('should be able to create a Qr for pix', function (): void {
 
     $resource = new PixResource(client: $client);
 
-    $response = $resource->createQrCode(
-        $this->requestDto,
-    );
+    $response = $resource->createQrCode($this->requestDto);
 
     expect($response)->toBeInstanceOf(CreatePixQrCodeResponse::class)
         ->and($response->data->id)->toBe('pix_char_123456')
@@ -74,7 +76,6 @@ it('should be able to create a Qr for pix', function (): void {
 });
 
 it('should throw exception when anything goes wrong', function () {
-
     $handler = new MockHandler([
         new ClientException(
             'Unauthorized',

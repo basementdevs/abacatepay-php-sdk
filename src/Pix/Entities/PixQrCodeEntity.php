@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Basement\AbacatePay\Pix\Entities;
 
-use Basement\AbacatePay\Billing\Enum\BillingMethodEnum;
 use Basement\AbacatePay\Billing\Enum\BillingStatusEnum;
 use JsonSerializable;
 
 final readonly class PixQrCodeEntity implements JsonSerializable
 {
-    /**
-     * @param  BillingMethodEnum[]  $methods
-     */
     public function __construct(
         public string $id,
         public int $amount,

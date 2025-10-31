@@ -111,10 +111,10 @@ it('throws exception on unauthorized', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customerId: null,
-        customer: null,
         allow_coupons: false,
         coupons: [],
+        customerId: null,
+        customer: null,
         externalId: null
     );
 
@@ -140,10 +140,10 @@ it('throws internal server error exception', function () {
         products: [],
         return_url: 'https://example.com/return',
         completion_url: 'https://example.com/complete',
-        customerId: null,
-        customer: null,
         allow_coupons: false,
         coupons: [],
+        customerId: null,
+        customer: null,
         externalId: null
     );
 
