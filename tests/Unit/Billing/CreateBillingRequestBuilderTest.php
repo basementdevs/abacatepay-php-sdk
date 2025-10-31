@@ -47,7 +47,7 @@ it('should build a valid CreateBillingRequest', function () {
 });
 
 it('should throw AbacatePayException when required fields are missing', function () {
-    expect(fn() => CreateBillingRequest::builder()->build())
+    expect(fn () => CreateBillingRequest::builder()->build())
         ->toThrow(AbacatePayException::class, 'Missing required fields');
 });
 
@@ -60,7 +60,7 @@ it('should throw AbacatePayException when both customer and customerId are set',
         ->forCustomer($this->customer)
         ->forCustomerId('cust_conflict');
 
-    expect(fn() => $builder->build())
+    expect(fn () => $builder->build())
         ->toThrow(InvalidArgumentException::class);
 });
 
